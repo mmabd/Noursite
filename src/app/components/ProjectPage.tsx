@@ -295,7 +295,7 @@ export function ProjectPage() {
                         geoJson={lotPlan.geoJson}
                         focusLotId={lot.id}
                         center={lotCenter}
-                        zoom={18}
+                        zoom={19}
                       />
                     ) : (
                       <div style={{
