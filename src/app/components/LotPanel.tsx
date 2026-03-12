@@ -242,7 +242,7 @@ function PanelLotDetail({ lot, onDeselect }: { lot: Lot; onDeselect: () => void 
           className="land-btn--ghost"
           style={{ padding: 0, color: "var(--land-ink-muted)" }}
         >
-          <svg width="12" height="12" viewBox="0 0 16 16" fill="none" stroke="currentColor" strokeWidth="1.5" style={isArabic ? { transform: "scaleX(-1)" } : undefined}>
+          <svg width="12" height="12" viewBox="0 0 16 16" fill="none" stroke="currentColor" strokeWidth="1.5">
             <path d="M13 8H3M7 4L3 8l4 4" strokeLinecap="round" strokeLinejoin="round" />
           </svg>
           {copy.lotPanel.overview}
