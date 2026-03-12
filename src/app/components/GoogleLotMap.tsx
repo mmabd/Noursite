@@ -180,8 +180,12 @@ export function GoogleLotMap({
           map.fitBounds(bounds, 56);
           googleMaps.event.addListenerOnce(map, "idle", () => {
             const currentZoom = map.getZoom();
-            if (typeof currentZoom === "number" && currentZoom > 23) {
-              map.setZoom(23);
+            if (typeof currentZoom === "number") {
+              if (currentZoom < initialZoom) {
+                map.setZoom(initialZoom);
+              } else if (currentZoom > 23) {
+                map.setZoom(23);
+              }
             }
           });
         }
