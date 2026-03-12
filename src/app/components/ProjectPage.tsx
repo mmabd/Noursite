@@ -74,14 +74,14 @@ export function ProjectPage() {
     <div style={{ background: "var(--land-surface)", minHeight: "100vh" }}>
       
       {/* ── Header ───────────────────────────────────────────── */}
-      <div className="proj-header" style={isArabic ? { direction: "rtl", textAlign: "right" } : undefined}>
+      <div className="proj-header">
         <div>
           <button
             onClick={() => navigate("/")}
             className="land-btn--ghost"
-            style={{ marginBottom: 24, color: "var(--land-label)", padding: 0, direction: isArabic ? "rtl" : "ltr" }}
+            style={{ marginBottom: 24, color: "var(--land-label)", padding: 0 }}
           >
-            <svg width="14" height="14" viewBox="0 0 16 16" fill="none" stroke="currentColor" strokeWidth="1.5">
+            <svg width="14" height="14" viewBox="0 0 16 16" fill="none" stroke="currentColor" strokeWidth="1.5" style={isArabic ? { transform: "scaleX(-1)" } : undefined}>
               <path d="M13 8H3M7 4L3 8l4 4" strokeLinecap="round" strokeLinejoin="round" />
             </svg>
             {copy.projectPage.back}
@@ -90,13 +90,13 @@ export function ProjectPage() {
           <div className="land-label" style={{ marginBottom: 12 }}>
             {projectLabel}
           </div>
-          <h1 className="land-heading" style={{ fontSize: "clamp(28px, 4vw, 56px)", marginBottom: 0, fontFamily: fontBody }}>
+          <h1 className="land-heading" style={{ fontSize: "clamp(28px, 4vw, 56px)", marginBottom: 0 }}>
             {project.name}
           </h1>
         </div>
 
-        <div className="proj-header__right" style={{ paddingBottom: 8, textAlign: isArabic ? "left" : "right" }}>
-          <div className="land-label" style={{ marginBottom: 8, justifyContent: isArabic ? "flex-start" : "flex-end" }}>
+        <div className="proj-header__right" style={{ paddingBottom: 8, textAlign: "right" }}>
+          <div className="land-label" style={{ marginBottom: 8, justifyContent: "flex-end" }}>
             {copy.projectPage.availability}
           </div>
           <div style={{
@@ -153,18 +153,18 @@ export function ProjectPage() {
       </div>
 
       {/* ── Stats strip ────────────────────────────────────────── */}
-      <div className="land-about__stats proj-stats-strip" style={{ borderBottom: "1px solid var(--land-border-soft)", direction: isArabic ? "rtl" : "ltr" }}>
+      <div className="land-about__stats proj-stats-strip" style={{ borderBottom: "1px solid var(--land-border-soft)" }}>
         {[
           { label: copy.projectPage.siteArea, value: project.area },
           unitMetric,
           { label: copy.projectPage.projectValue, value: project.value },
           { label: copy.projectPage.completion, value: project.completion },
         ].map((s) => (
-          <div key={s.label} className="land-about__stat" style={{ padding: "32px 40px", textAlign: isArabic ? "right" : "left" }}>
-            <div className="land-about__stat-desc" style={{ marginBottom: 12, marginTop: 0, fontFamily: fontBody }}>
+          <div key={s.label} className="land-about__stat" style={{ padding: "32px 40px" }}>
+            <div className="land-about__stat-desc" style={{ marginBottom: 12, marginTop: 0 }}>
               {s.label}
             </div>
-            <div className="land-about__stat-num" style={{ fontFamily: fontBody }}>
+            <div className="land-about__stat-num">
               {s.value}
             </div>
           </div>
@@ -173,7 +173,7 @@ export function ProjectPage() {
 
       {/* ── Overview ───────────────────────────────────────────── */}
       <section className="land-section land-section--off" id="overview">
-        <div className="proj-overview" style={isArabic ? { direction: "rtl", textAlign: "right" } : undefined}>
+        <div className="proj-overview">
           {/* Left — text */}
           <div>
             <Reveal delay={0}>
@@ -186,12 +186,7 @@ export function ProjectPage() {
             </Reveal>
             <Reveal delay={160}>
               {project.description.split("\n\n").map((para, i) => (
-                <p key={i} className="land-about__body" style={{
-                  ...(i > 0 ? { marginTop: 0 } : {}),
-                  fontFamily: fontBody,
-                  direction: isArabic ? "rtl" : "ltr",
-                  textAlign: isArabic ? "right" : "left",
-                }}>
+                <p key={i} className="land-about__body" style={i > 0 ? { marginTop: 0 } : undefined}>
                   {para}
                 </p>
               ))}
@@ -213,8 +208,6 @@ export function ProjectPage() {
                   fontSize: 14,
                   color: "var(--land-ink-soft)",
                   lineHeight: 1.5,
-                  direction: isArabic ? "rtl" : "ltr",
-                  textAlign: isArabic ? "right" : "left",
                 }}>
                   <span style={{
                     width: 6, height: 6,
@@ -230,10 +223,10 @@ export function ProjectPage() {
       </section>
 
       {/* ── Featured lots ──────────────────────────────────────── */}
-      <section className="land-section" style={isArabic ? { direction: "rtl" } : undefined}>
+      <section className="land-section">
         {/* Header */}
         <div className="land-projects__header">
-          <div style={isArabic ? { textAlign: "right" } : undefined}>
+          <div>
             <Reveal delay={0}>
               <div className="land-label">{copy.projectPage.opportunities}</div>
             </Reveal>
@@ -248,7 +241,7 @@ export function ProjectPage() {
               color: "var(--land-ink-soft)",
               lineHeight: 1.7,
               maxWidth: 280,
-              textAlign: isArabic ? "left" : "right",
+              textAlign: "right",
               margin: 0,
             }}>
               {copy.projectPage.featuredBlurb}
@@ -302,7 +295,7 @@ export function ProjectPage() {
                         geoJson={lotPlan.geoJson}
                         focusLotId={lot.id}
                         center={lotCenter}
-                        zoom={22}
+                        zoom={30}
                       />
                     ) : (
                       <div style={{
@@ -331,7 +324,7 @@ export function ProjectPage() {
                     style={{ background: "linear-gradient(to top, rgba(0,0,0,0.85) 0%, rgba(0,0,0,0.4) 42%, transparent 65%)" }}
                   />
 
-                  <div className="land-project-card__info" style={isArabic ? { direction: "rtl", textAlign: "right" } : undefined}>
+                  <div className="land-project-card__info">
                     <div className="land-project-card__tag">
                       {getLotLabel(lot.num, lot.label)} — {lot.size.toLocaleString()} m²
                     </div>
@@ -378,7 +371,7 @@ export function ProjectPage() {
       </section>
 
       {/* ── How It Works ───────────────────────────────────────── */}
-      <section className="land-section land-section--mid" style={isArabic ? { direction: "rtl", textAlign: "right" } : undefined}>
+      <section className="land-section land-section--mid">
         <Reveal delay={0}>
           <div className="land-label">{copy.projectPage.process}</div>
         </Reveal>
@@ -390,7 +383,7 @@ export function ProjectPage() {
         <div className="proj-how-grid">
           {copy.projectPage.processSteps.map((step, i) => (
             <Reveal key={step.num} delay={160 + i * 100} duration={900}>
-              <div className="land-review-card" style={{ height: "100%", direction: isArabic ? "rtl" : "ltr", textAlign: isArabic ? "right" : "left" }}>
+              <div className="land-review-card" style={{ height: "100%" }}>
                 {/* Step number */}
                 <div style={{
                   fontFamily: fontMono,
@@ -398,7 +391,6 @@ export function ProjectPage() {
                   letterSpacing: "0.22em",
                   color: "var(--land-clay)",
                   marginBottom: 24,
-                  textAlign: isArabic ? "right" : "left",
                 }}>
                   {step.num}
                 </div>
@@ -429,7 +421,7 @@ export function ProjectPage() {
       {/* ── Prev / Next ────────────────────────────────────────── */}
       <div
         className="proj-nav-grid"
-        style={{ background: "var(--land-panel-muted)", borderTop: "1px solid var(--land-border-soft)", direction: isArabic ? "rtl" : "ltr" }}
+        style={{ background: "var(--land-panel-muted)", borderTop: "1px solid var(--land-border-soft)" }}
       >
         <div
           className="land-proj-nav land-proj-nav--prev proj-nav-item"
@@ -449,7 +441,7 @@ export function ProjectPage() {
             </svg>
             {copy.projectPage.previous}
           </div>
-          <div className="proj-nav-item__name" style={{ fontFamily: fontBody }}>
+          <div className="proj-nav-item__name">
             {prevProject?.name ?? "—"}
           </div>
         </div>
@@ -475,7 +467,7 @@ export function ProjectPage() {
               <polyline points="12 5 19 12 12 19" />
             </svg>
           </div>
-          <div className="proj-nav-item__name" style={{ fontFamily: fontBody }}>
+          <div className="proj-nav-item__name">
             {nextProject?.name ?? "—"}
           </div>
         </div>
