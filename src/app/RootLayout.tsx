@@ -7,14 +7,14 @@ import "./unlicensed.css";
 import "./landing.css";
 
 const NAV = [
-  { label: "Homepage",      id: "home",      scrollId: "home",    route: null },
-  { label: "Project One",   id: "project-1", scrollId: null,      route: "/project/1" },
-  { label: "Project Two",   id: "project-2", scrollId: null,      route: "/project/2" },
-  { label: "Project Three", id: "project-3", scrollId: null,      route: "/project/3" },
-  { label: "Project Four",  id: "project-4", scrollId: null,      route: "/project/4" },
-  { label: "About",         id: "about",     scrollId: "about",   route: null },
-  { label: "Gallery",       id: "gallery",   scrollId: "gallery", route: null },
-  { label: "Contact Us",    id: "contact",   scrollId: "contact", route: null },
+  { label: "Homepage",      id: "home",      scrollId: "home",    route: null,          navKey: "home" as const },
+  { label: "Project One",   id: "project-1", scrollId: null,      route: "/project/1",  navKey: "project1" as const },
+  { label: "Project Two",   id: "project-2", scrollId: null,      route: "/project/2",  navKey: "project2" as const },
+  { label: "Project Three", id: "project-3", scrollId: null,      route: "/project/3",  navKey: "project3" as const },
+  { label: "Project Four",  id: "project-4", scrollId: null,      route: "/project/4",  navKey: "project4" as const },
+  { label: "About",         id: "about",     scrollId: "about",   route: null,          navKey: "about" as const },
+  { label: "Gallery",       id: "gallery",   scrollId: "gallery", route: null,          navKey: "gallery" as const },
+  { label: "Contact Us",    id: "contact",   scrollId: "contact", route: null,          navKey: "contact" as const },
 ] as const;
 
 const FacebookIcon = () => (
@@ -165,21 +165,7 @@ export function RootLayout() {
               className={`unlicensed-nav-item ${activeNav === item.id ? "active" : ""}`}
               onClick={() => handleNavClick(item)}
             >
-              {copy.shell.nav[item.id === "home"
-                ? "home"
-                : item.id === "project-1"
-                  ? "project1"
-                  : item.id === "project-2"
-                    ? "project2"
-                    : item.id === "project-3"
-                      ? "project3"
-                      : item.id === "project-4"
-                        ? "project4"
-                        : item.id === "about"
-                          ? "about"
-                          : item.id === "gallery"
-                            ? "gallery"
-                            : "contact"]}
+              {copy.shell.nav[item.navKey]}
             </button>
           ))}
         </nav>
@@ -206,9 +192,9 @@ export function RootLayout() {
           </div>
 
           <div className="unlicensed-socials">
-            <a href="#" className="social-icon" aria-label="Facebook"><FacebookIcon /></a>
-            <a href="#" className="social-icon" aria-label="X"><XIcon /></a>
-            <a href="#" className="social-icon" aria-label="Instagram"><InstagramIcon /></a>
+            <a href="javascript:void(0)" className="social-icon" aria-label="Facebook"><FacebookIcon /></a>
+            <a href="javascript:void(0)" className="social-icon" aria-label="X"><XIcon /></a>
+            <a href="javascript:void(0)" className="social-icon" aria-label="Instagram"><InstagramIcon /></a>
           </div>
         </div>
       </aside>
@@ -241,21 +227,7 @@ export function RootLayout() {
                   handleNavClick(item);
                 }}
               >
-                {copy.shell.nav[item.id === "home"
-                  ? "home"
-                  : item.id === "project-1"
-                    ? "project1"
-                    : item.id === "project-2"
-                      ? "project2"
-                      : item.id === "project-3"
-                        ? "project3"
-                        : item.id === "project-4"
-                          ? "project4"
-                          : item.id === "about"
-                            ? "about"
-                            : item.id === "gallery"
-                              ? "gallery"
-                              : "contact"]}
+                {copy.shell.nav[item.navKey]}
               </button>
             ))}
           </nav>
@@ -281,9 +253,9 @@ export function RootLayout() {
               </div>
             </div>
             <div className="unlicensed-socials">
-              <a href="#" className="social-icon" aria-label="Facebook"><FacebookIcon /></a>
-              <a href="#" className="social-icon" aria-label="X"><XIcon /></a>
-              <a href="#" className="social-icon" aria-label="Instagram"><InstagramIcon /></a>
+              <a href="javascript:void(0)" className="social-icon" aria-label="Facebook"><FacebookIcon /></a>
+              <a href="javascript:void(0)" className="social-icon" aria-label="X"><XIcon /></a>
+              <a href="javascript:void(0)" className="social-icon" aria-label="Instagram"><InstagramIcon /></a>
             </div>
           </div>
         </div>

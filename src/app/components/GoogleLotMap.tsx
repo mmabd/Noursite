@@ -3,6 +3,7 @@ import { type Lot, type LotStatus } from "../data/lots";
 import { type ProjectLotPlan } from "../data/projectLotPlans";
 import { loadGoogleMaps } from "../lib/loadGoogleMaps";
 import { useLanguage } from "../i18n";
+import { useFonts } from "../lib/fonts";
 
 interface GoogleLotMapProps {
   lots: Lot[];
@@ -53,8 +54,7 @@ export function GoogleLotMap({
   initialZoom,
 }: GoogleLotMapProps) {
   const { copy, isArabic } = useLanguage();
-  const fontBody = isArabic ? "'Baloo Bhaijaan 2', 'Hacen Algeria', sans-serif" : "'Space Grotesk', sans-serif";
-  const fontMono = isArabic ? "'Baloo Bhaijaan 2', 'Hacen Algeria', sans-serif" : "'Space Mono', monospace";
+  const { fontBody, fontMono } = useFonts();
   const containerRef = useRef<HTMLDivElement | null>(null);
   const mapRef = useRef<any>(null);
   const googleMapsRef = useRef<any>(null);

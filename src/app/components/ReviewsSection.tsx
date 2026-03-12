@@ -11,7 +11,6 @@ export function ReviewsSection() {
   const total = items.length;
 
   const [current, setCurrent] = useState(0);
-  const [animate, setAnimate] = useState(true);
   const autoplayRef = useRef<ReturnType<typeof setInterval> | null>(null);
   const isTransitioning = useRef(false);
 
@@ -19,7 +18,6 @@ export function ReviewsSection() {
     (index: number) => {
       if (isTransitioning.current) return;
       isTransitioning.current = true;
-      setAnimate(true);
       setCurrent(index);
       setTimeout(() => {
         isTransitioning.current = false;
@@ -29,12 +27,22 @@ export function ReviewsSection() {
   );
 
   const goNext = useCallback(() => {
-    goTo((current + 1) % total);
-  }, [current, total, goTo]);
+    setCurrent(prev => {
+      if (isTransitioning.current) return prev;
+      isTransitioning.current = true;
+      setTimeout(() => { isTransitioning.current = false; }, TRANSITION_MS + 20);
+      return (prev + 1) % total;
+    });
+  }, [total]);
 
   const goPrev = useCallback(() => {
-    goTo((current - 1 + total) % total);
-  }, [current, total, goTo]);
+    setCurrent(prev => {
+      if (isTransitioning.current) return prev;
+      isTransitioning.current = true;
+      setTimeout(() => { isTransitioning.current = false; }, TRANSITION_MS + 20);
+      return (prev - 1 + total) % total;
+    });
+  }, [total]);
 
   /* ── Autoplay ───────────────────────────────────────────── */
   const startAutoplay = useCallback(() => {

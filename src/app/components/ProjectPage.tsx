@@ -5,16 +5,18 @@ import type { Lot } from "../data/lots";
 import { getProjectLotPlan } from "../data/projectLotPlans";
 import { useLotData } from "../lib/useLotData";
 import { useLanguage } from "../i18n";
+import { useFonts } from "../lib/fonts";
 import { GoogleLotMap } from "./GoogleLotMap";
 import { LotMap } from "./LotMap";
 import { LotPanel } from "./LotPanel";
 import { Reveal } from "./Reveal";
 import { StaticLotMap } from "./StaticLotMap";
 
+const PROJECT_LABEL_KEYS = ["project1", "project1", "project2", "project3", "project4"] as const;
+
 export function ProjectPage() {
   const { copy, isArabic } = useLanguage();
-  const fontBody = isArabic ? "'Baloo Bhaijaan 2', 'Hacen Algeria', sans-serif" : "'Space Grotesk', sans-serif";
-  const fontMono = isArabic ? "'Baloo Bhaijaan 2', 'Hacen Algeria', sans-serif" : "'Space Mono', monospace";
+  const { fontBody, fontMono } = useFonts();
   const { num } = useParams<{ num: string }>();
   const navigate = useNavigate();
 
@@ -24,7 +26,22 @@ export function ProjectPage() {
   const projectNum = Number(num);
   const { lots: sheetLots, loading: sheetLoading, error: sheetError } = useLotData(projectNum);
 
-  const project = projects.find(p => p.num === projectNum);
+  const project = projects.find(p => p.num === projectNum) ?? null;
+
+  // All hooks must be called unconditionally (before any early return)
+  const sheetKey = useMemo(
+    () => sheetLots.length > 0
+      ? sheetLots.map(l => `${l.lot_id}:${l.status}:${l.price}:${l.size_m2}`).join("|")
+      : "",
+    [sheetLots],
+  );
+
+  const lotPlan = useMemo(
+    () => project ? getProjectLotPlan(project.num, sheetLots.length > 0 ? sheetLots : undefined) : null,
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+    [project?.num, sheetKey],
+  );
+
   if (!project) {
     return (
       <div style={{ padding: 80, fontFamily: fontMono, color: "var(--land-ink-muted)" }}>
@@ -37,19 +54,6 @@ export function ProjectPage() {
     console.warn("[ProjectPage] Sheet fetch failed, using static data:", sheetError);
   }
 
-  // Build a stable key from sheet data so lotPlan only recomputes when data actually changes
-  const sheetKey = useMemo(
-    () => sheetLots.length > 0
-      ? sheetLots.map(l => `${l.lot_id}:${l.status}:${l.price}:${l.size_m2}`).join("|")
-      : "",
-    [sheetLots],
-  );
-
-  const lotPlan = useMemo(
-    () => getProjectLotPlan(project.num, sheetLots.length > 0 ? sheetLots : undefined),
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-    [project.num, sheetKey],
-  );
   const projectLots: Lot[] = lotPlan?.lots ?? [];
   const featuredLots = projectLots.filter(l => l.featured);
   const selectedLot  = selectedLotId ? projectLots.find(l => l.id === selectedLotId) ?? null : null;
@@ -57,13 +61,7 @@ export function ProjectPage() {
   const prevProject  = projects.find(p => p.num === project.num - 1);
   const getLotLabel = (lotNumber: number, fallback: string) =>
     isArabic ? `${copy.lotPanel.lotPrefix} ${String(lotNumber).padStart(2, "0")}` : fallback;
-  const projectLabel = project.num === 1
-    ? copy.projectPage.labels.project1
-    : project.num === 2
-      ? copy.projectPage.labels.project2
-      : project.num === 3
-        ? copy.projectPage.labels.project3
-        : copy.projectPage.labels.project4;
+  const projectLabel = copy.projectPage.labels[PROJECT_LABEL_KEYS[project.num] ?? "project1"];
 
   const availableCount = projectLots.filter(l => l.status === "available").length;
   const unitMetric = lotPlan
@@ -423,13 +421,17 @@ export function ProjectPage() {
         className="proj-nav-grid"
         style={{ background: "var(--land-panel-muted)", borderTop: "1px solid var(--land-border-soft)" }}
       >
-        <div
+        <button
           className="land-proj-nav land-proj-nav--prev proj-nav-item"
           onClick={() => prevProject && navigate(`/project/${prevProject.num}`)}
+          disabled={!prevProject}
           style={{
             borderInlineEnd: "1px solid var(--land-border-soft)",
             cursor: prevProject ? "pointer" : "default",
             opacity: prevProject ? 1 : 0.3,
+            background: "transparent",
+            border: "none",
+            textAlign: "start",
           }}
           onMouseEnter={e => prevProject && (e.currentTarget.style.background = "var(--land-status-available-soft)")}
           onMouseLeave={e => (e.currentTarget.style.background = "transparent")}
@@ -444,11 +446,12 @@ export function ProjectPage() {
           <div className="proj-nav-item__name">
             {prevProject?.name ?? "—"}
           </div>
-        </div>
+        </button>
 
-        <div
+        <button
           className="land-proj-nav land-proj-nav--next proj-nav-item"
           onClick={() => nextProject && navigate(`/project/${nextProject.num}`)}
+          disabled={!nextProject}
           style={{
             textAlign: "end",
             cursor: nextProject ? "pointer" : "default",
@@ -456,6 +459,8 @@ export function ProjectPage() {
             display: "flex",
             flexDirection: "column",
             alignItems: "flex-end",
+            background: "transparent",
+            border: "none",
           }}
           onMouseEnter={e => nextProject && (e.currentTarget.style.background = "var(--land-clay-soft)")}
           onMouseLeave={e => (e.currentTarget.style.background = "transparent")}
@@ -470,7 +475,7 @@ export function ProjectPage() {
           <div className="proj-nav-item__name">
             {nextProject?.name ?? "—"}
           </div>
-        </div>
+        </button>
       </div>
     </div>
   );

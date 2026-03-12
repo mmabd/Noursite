@@ -31,6 +31,11 @@ const getInitialTransform = (from: Direction, distance: number, scale: boolean) 
   }
 };
 
+// Computed once at module level — avoids recalculating on every render
+const prefersReducedMotion =
+  typeof window !== "undefined" &&
+  window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
 export function Reveal({
   children,
   delay = 0,
@@ -47,9 +52,6 @@ export function Reveal({
   const ref = useRef<HTMLDivElement>(null);
   const [visible, setVisible] = useState(false);
   const hasAnimated = useRef(false);
-  const prefersReducedMotion =
-    typeof window !== "undefined" &&
-    window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 
   const handleIntersect = useCallback(
     ([entry]: IntersectionObserverEntry[], observer: IntersectionObserver) => {
@@ -123,7 +125,7 @@ export function Reveal({
     ]
       .filter(Boolean)
       .join(", "),
-    willChange: "opacity, transform, filter",
+    willChange: "auto",
   };
 
   // Skip animations entirely when user prefers reduced motion

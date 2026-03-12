@@ -52,27 +52,27 @@ export function ContactSection() {
           <form onSubmit={handleSubmit}>
             <div className="land-form__row">
               <div className="land-form__field">
-                <label className="land-form__label">{copy.contact.form.firstName}</label>
-                <input name="firstName" value={form.firstName} onChange={handleChange} className="land-form__input" placeholder={copy.contact.form.placeholders.firstName} />
+                <label htmlFor="contact-firstName" className="land-form__label">{copy.contact.form.firstName}</label>
+                <input id="contact-firstName" name="firstName" value={form.firstName} onChange={handleChange} className="land-form__input" placeholder={copy.contact.form.placeholders.firstName} />
               </div>
               <div className="land-form__field">
-                <label className="land-form__label">{copy.contact.form.lastName}</label>
-                <input name="lastName" value={form.lastName} onChange={handleChange} className="land-form__input" placeholder={copy.contact.form.placeholders.lastName} />
+                <label htmlFor="contact-lastName" className="land-form__label">{copy.contact.form.lastName}</label>
+                <input id="contact-lastName" name="lastName" value={form.lastName} onChange={handleChange} className="land-form__input" placeholder={copy.contact.form.placeholders.lastName} />
               </div>
             </div>
             <div className="land-form__row">
               <div className="land-form__field">
-                <label className="land-form__label">{copy.contact.form.email}</label>
-                <input name="email" type="email" value={form.email} onChange={handleChange} className="land-form__input" placeholder={copy.contact.form.placeholders.email} />
+                <label htmlFor="contact-email" className="land-form__label">{copy.contact.form.email}</label>
+                <input id="contact-email" name="email" type="email" value={form.email} onChange={handleChange} className="land-form__input" placeholder={copy.contact.form.placeholders.email} />
               </div>
               <div className="land-form__field">
-                <label className="land-form__label">{copy.contact.form.phone}</label>
-                <input name="phone" value={form.phone} onChange={handleChange} className="land-form__input" placeholder={copy.contact.form.placeholders.phone} />
+                <label htmlFor="contact-phone" className="land-form__label">{copy.contact.form.phone}</label>
+                <input id="contact-phone" name="phone" value={form.phone} onChange={handleChange} className="land-form__input" placeholder={copy.contact.form.placeholders.phone} />
               </div>
             </div>
             <div className="land-form__field">
-              <label className="land-form__label">{copy.contact.form.interest}</label>
-              <select name="interest" value={form.interest} onChange={handleChange} className="land-form__select">
+              <label htmlFor="contact-interest" className="land-form__label">{copy.contact.form.interest}</label>
+              <select id="contact-interest" name="interest" value={form.interest} onChange={handleChange} className="land-form__select">
                 <option value="" disabled>{copy.contact.form.options[0]}</option>
                 {copy.contact.form.options.slice(1).map((option) => (
                   <option key={option}>{option}</option>
@@ -80,8 +80,8 @@ export function ContactSection() {
               </select>
             </div>
             <div className="land-form__field">
-              <label className="land-form__label">{copy.contact.form.message}</label>
-              <textarea name="message" value={form.message} onChange={handleChange} className="land-form__textarea" placeholder={copy.contact.form.placeholders.message} />
+              <label htmlFor="contact-message" className="land-form__label">{copy.contact.form.message}</label>
+              <textarea id="contact-message" name="message" value={form.message} onChange={handleChange} className="land-form__textarea" placeholder={copy.contact.form.placeholders.message} />
             </div>
             <button type="submit" className="land-form__submit">
               {copy.contact.form.submit}

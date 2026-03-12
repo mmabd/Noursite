@@ -23,10 +23,10 @@ export interface UseLotDataResult {
 }
 
 /**
- * Paste your deployed Google Apps Script Web App URL here.
+ * Set via VITE_SHEETS_API_URL in .env.
  * Leave empty to skip fetching and fall back to static data.
  */
-const SHEETS_API_URL = "https://script.google.com/macros/s/AKfycbyAcG5akoUWmwcBgDFEP9kcwgqKfbbaoeHOqJCkImssGnZ1Tx7fs2ryLCkCyBKdTAQ9mg/exec";
+const SHEETS_API_URL = import.meta.env.VITE_SHEETS_API_URL ?? "";
 
 const REFRESH_INTERVAL_MS = 30_000;
 

@@ -2,6 +2,7 @@ import { useState } from "react";
 import { Lot, LotStatus } from "../data/lots";
 import { Project } from "../data/projects";
 import { useLanguage } from "../i18n";
+import { useFonts } from "../lib/fonts";
 
 interface LotPanelProps {
   project: Project;
@@ -29,8 +30,8 @@ function getLotLabel(lot: Lot, copy: ReturnType<typeof useLanguage>["copy"], isA
 
 /* ── Lot photo gallery ─────────────────────────────────────── */
 function LotGallery({ photos }: { photos: string[] }) {
-  const { copy, isArabic } = useLanguage();
-  const fontMono = isArabic ? "'Baloo Bhaijaan 2', 'Hacen Algeria', sans-serif" : "'Space Mono', monospace";
+  const { copy } = useLanguage();
+  const { fontMono } = useFonts();
   const [idx, setIdx] = useState(0);
   if (!photos.length) return null;
 
@@ -69,7 +70,7 @@ function LotGallery({ photos }: { photos: string[] }) {
               <line x1="19" y1="12" x2="5" y2="12" />
               <polyline points="12 19 5 12 12 5" />
             </svg>
-            PREV
+            {copy.projectPage.previous}
           </button>
           <span style={{
             fontFamily: fontMono,
@@ -89,7 +90,7 @@ function LotGallery({ photos }: { photos: string[] }) {
               color: idx === photos.length - 1 ? "var(--land-inverse-faint)" : "var(--land-inverse)",
             }}
           >
-            NEXT
+            {copy.projectPage.next}
             <svg className="land-btn__arrow-icon" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
               <line x1="5" y1="12" x2="19" y2="12" />
               <polyline points="12 5 19 12 12 19" />
@@ -103,9 +104,8 @@ function LotGallery({ photos }: { photos: string[] }) {
 
 /* ── Default overview (no lot selected) ───────────────────── */
 function PanelOverview({ project, lots }: { project: Project; lots: Lot[] }) {
-  const { copy, isArabic } = useLanguage();
-  const fontBody = isArabic ? "'Baloo Bhaijaan 2', 'Hacen Algeria', sans-serif" : "'Space Grotesk', sans-serif";
-  const fontMono = isArabic ? "'Baloo Bhaijaan 2', 'Hacen Algeria', sans-serif" : "'Space Mono', monospace";
+  const { copy } = useLanguage();
+  const { fontBody, fontMono } = useFonts();
   const available = lots.filter(l => l.status === "available").length;
   const reserved  = lots.filter(l => l.status === "reserved").length;
   const sold      = lots.filter(l => l.status === "sold").length;
@@ -225,8 +225,7 @@ function PanelOverview({ project, lots }: { project: Project; lots: Lot[] }) {
 /* ── Selected lot detail ──────────────────────────────────── */
 function PanelLotDetail({ lot, onDeselect }: { lot: Lot; onDeselect: () => void }) {
   const { copy, isArabic } = useLanguage();
-  const fontBody = isArabic ? "'Baloo Bhaijaan 2', 'Hacen Algeria', sans-serif" : "'Space Grotesk', sans-serif";
-  const fontMono = isArabic ? "'Baloo Bhaijaan 2', 'Hacen Algeria', sans-serif" : "'Space Mono', monospace";
+  const { fontBody, fontMono } = useFonts();
   return (
     <div>
       {/* Back link */}
@@ -362,8 +361,7 @@ export function LotPanel({
   className,
 }: LotPanelProps) {
   const { copy, isArabic } = useLanguage();
-  const fontBody = isArabic ? "'Baloo Bhaijaan 2', 'Hacen Algeria', sans-serif" : "'Space Grotesk', sans-serif";
-  const fontMono = isArabic ? "'Baloo Bhaijaan 2', 'Hacen Algeria', sans-serif" : "'Space Mono', monospace";
+  const { fontBody, fontMono } = useFonts();
   return (
     <div className={`proj-lot-panel ${className ?? ""}`} style={{
       display: "flex",
@@ -407,7 +405,7 @@ export function LotPanel({
           {featuredLots.map(lot => {
             const isActive = selectedLot?.id === lot.id;
             return (
-              <div
+              <button
                 key={lot.id}
                 onClick={() => onLotSelect(lot.id)}
                 style={{
@@ -418,6 +416,7 @@ export function LotPanel({
                   padding: "16px",
                   cursor: "pointer",
                   transition: "all 0.2s",
+                  textAlign: "start",
                 }}
               >
                 {/* Lot label + status dot */}
@@ -463,7 +462,7 @@ export function LotPanel({
                 }}>
                   {lot.size.toLocaleString()} M²
                 </div>
-              </div>
+              </button>
             );
           })}
         </div>

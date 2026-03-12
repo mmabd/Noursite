@@ -1,6 +1,7 @@
 import { Lot, LotStatus } from "../data/lots";
 import siteplanImage from "../../assets/704f038041874bec2c7db0944b0e0058114106ec.png";
 import { useLanguage } from "../i18n";
+import { useFonts } from "../lib/fonts";
 
 interface LotMapProps {
   lots: Lot[];
@@ -26,8 +27,7 @@ export function LotMap({
   projectName = "SITE PLAN",
 }: LotMapProps) {
   const { copy, isArabic } = useLanguage();
-  const fontBody = isArabic ? "'Baloo Bhaijaan 2', 'Hacen Algeria', sans-serif" : "'Space Grotesk', sans-serif";
-  const fontMono = isArabic ? "'Baloo Bhaijaan 2', 'Hacen Algeria', sans-serif" : "'Space Mono', monospace";
+  const { fontBody, fontMono } = useFonts();
 
   return (
     <div style={{ width: "100%", height: "100%", position: "relative", overflow: "hidden", background: "var(--land-card-alt)" }}>

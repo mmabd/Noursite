@@ -53,9 +53,9 @@ export function FooterSection() {
             {copy.footer.copy}
           </div>
           <div className="land-footer__socials">
-            <a href="#" className="land-footer__social" aria-label="Facebook"><FacebookIcon /></a>
-            <a href="#" className="land-footer__social" aria-label="X"><XIcon /></a>
-            <a href="#" className="land-footer__social" aria-label="Instagram"><InstagramIcon /></a>
+            <a href="javascript:void(0)" className="land-footer__social" aria-label="Facebook"><FacebookIcon /></a>
+            <a href="javascript:void(0)" className="land-footer__social" aria-label="X"><XIcon /></a>
+            <a href="javascript:void(0)" className="land-footer__social" aria-label="Instagram"><InstagramIcon /></a>
           </div>
         </div>
       </Reveal>
