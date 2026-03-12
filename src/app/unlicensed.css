@@ -1,0 +1,400 @@
+/* ============================================================
+   UNLICENSED — record label UI
+   ============================================================ */
+
+.unlicensed-root {
+  display: flex;
+  width: 100vw;
+  height: 100vh;
+  overflow: hidden;
+  background: var(--land-surface);
+  font-family: 'Space Grotesk', 'Space Mono', monospace, sans-serif;
+  color: var(--land-ink);
+}
+
+/* ── Sidebar ─────────────────────────────────────────────── */
+
+.unlicensed-sidebar {
+  display: flex;
+  flex-direction: column;
+  width: 200px;
+  min-width: 180px;
+  height: 100%;
+  padding: 36px 28px;
+  border-inline-end: 1px solid rgba(183, 200, 188, 0.2);
+  background: var(--land-surface);
+  position: relative;
+  z-index: 10;
+}
+
+.unlicensed-logo {
+  display: flex;
+  align-items: center;
+  margin-bottom: 56px;
+}
+
+.unlicensed-logo-image {
+  display: block;
+  width: 116px;
+  height: auto;
+  max-width: 100%;
+}
+
+html[lang="ar"] .unlicensed-logo-image {
+  width: 132px;
+}
+
+.unlicensed-nav {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.unlicensed-nav-item {
+  background: none;
+  border: none;
+  padding: 6px 0;
+  text-align: start;
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: 13px;
+  font-weight: 500;
+  letter-spacing: -0.02em;
+  color: var(--land-ink-muted);
+  cursor: pointer;
+  transition: color 0.2s;
+  position: relative;
+}
+
+.unlicensed-nav-item:hover {
+  color: var(--land-ink-soft);
+}
+
+.unlicensed-nav-item.active {
+  color: var(--land-ink);
+  font-weight: 700;
+}
+
+.unlicensed-nav-item.active::before {
+  content: '';
+  position: absolute;
+  inset-inline-start: -28px;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 20px;
+  height: 2px;
+  background: var(--land-status-available);
+}
+
+.unlicensed-sidebar-footer {
+  margin-top: auto;
+}
+
+/* ── Social icons ────────────────────────────────────────── */
+
+.unlicensed-socials {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  gap: 16px;
+  padding-bottom: 0;
+}
+
+.unlicensed-language-switch {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  width: 80px;
+  margin-bottom: 20px;
+}
+
+.unlicensed-language-switch__label {
+  display: block;
+  width: 100%;
+  font-family: 'Space Mono', monospace;
+  font-size: 8px;
+  letter-spacing: 0.22em;
+  color: var(--land-ink-muted);
+  text-transform: uppercase;
+  margin-bottom: 8px;
+}
+
+.unlicensed-language-switch__controls {
+  display: inline-flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  gap: 3px;
+  padding: 3px;
+  background: rgba(255, 255, 255, 0.42);
+  border: 1px solid var(--land-border-soft);
+  border-radius: 999px;
+}
+
+.unlicensed-language-switch__button {
+  border: none;
+  background: transparent;
+  color: var(--land-ink-muted);
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: 9px;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  width: 34px;
+  height: 26px;
+  padding: 0;
+  border-radius: 999px;
+  cursor: pointer;
+  transition: background 0.2s ease, color 0.2s ease;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.unlicensed-language-switch__button.active {
+  background: var(--land-card-dark);
+  color: var(--land-inverse);
+}
+
+html[lang="ar"] .unlicensed-language-switch {
+  margin-bottom: 24px;
+}
+
+.social-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--land-ink-faint);
+  text-decoration: none;
+  transition: color 0.2s ease, transform 0.2s ease;
+}
+
+.social-icon:hover {
+  color: var(--land-clay);
+  transform: translateY(-1px);
+}
+
+/* ── Main ───────────────────────────────────────────────── */
+
+.unlicensed-main {
+  flex: 1;
+  position: relative;
+  overflow-y: auto;
+  overflow-x: hidden;
+}
+
+/* ============================================================
+   RESPONSIVE — Mobile top bar & nav overlay
+   ============================================================ */
+
+/* ── Mobile top bar — hidden on desktop ────────────────────── */
+.unlicensed-topbar {
+  display: none;
+}
+
+/* ── Hamburger button ──────────────────────────────────────── */
+.unlicensed-hamburger {
+  display: none;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 5.5px;
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 10px;
+  position: relative;
+  z-index: 400;
+}
+
+.unlicensed-hamburger span {
+  display: block;
+  width: 22px;
+  height: 1.5px;
+  background: var(--land-ink);
+  border-radius: 1px;
+  transform-origin: center;
+  transition:
+    transform  0.38s cubic-bezier(0.22, 1, 0.36, 1),
+    opacity    0.22s ease,
+    background 0.22s ease;
+}
+
+/* ── Open state → morph to × ──────────────────────────────── */
+.unlicensed-hamburger.is-open span:nth-child(1) {
+  transform: translateY(7px) rotate(45deg);
+}
+.unlicensed-hamburger.is-open span:nth-child(2) {
+  opacity: 0;
+  transform: scaleX(0);
+}
+.unlicensed-hamburger.is-open span:nth-child(3) {
+  transform: translateY(-7px) rotate(-45deg);
+}
+
+/* ── Mobile breakpoint ─────────────────────────────────────── */
+@media (max-width: 767px) {
+  .unlicensed-root {
+    flex-direction: column;
+    height: 100vh;
+    overflow: hidden;
+  }
+
+  .unlicensed-sidebar {
+    display: none;
+  }
+
+  .unlicensed-topbar {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 20px;
+    height: 52px;
+    background: var(--land-surface);
+    border-bottom: none;
+    flex-shrink: 0;
+    position: relative;
+    z-index: 400;
+  }
+
+  .unlicensed-logo-image {
+    width: auto;
+    height: 40px;
+  }
+
+  .unlicensed-logo-image--side {
+    height: 32px;
+  }
+
+  html[lang="ar"] .unlicensed-logo-image {
+    width: auto;
+    height: 40px;
+  }
+
+  html[lang="ar"] .unlicensed-logo-image--side {
+    height: 32px;
+  }
+
+  .unlicensed-hamburger {
+    display: flex;
+  }
+
+  .unlicensed-main {
+    flex: 1;
+    overflow-y: auto;
+    overflow-x: hidden;
+  }
+}
+
+/* ── Full-screen mobile nav overlay ───────────────────────── */
+.unlicensed-mobile-nav {
+  position: fixed;
+  top: 52px;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 300;
+  background: linear-gradient(180deg, var(--land-shell) 0%, var(--land-surface-alt) 100%);
+  display: flex;
+  flex-direction: column;
+  padding: 52px 36px 48px;
+  overflow-y: auto;
+  animation: mobile-nav-in 0.4s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+@keyframes mobile-nav-in {
+  from {
+    opacity: 0;
+    clip-path: inset(0 0 100% 0);
+  }
+  to {
+    opacity: 1;
+    clip-path: inset(0 0 0% 0);
+  }
+}
+
+@keyframes mobile-nav-out {
+  from {
+    opacity: 1;
+    clip-path: inset(0 0 0% 0);
+  }
+  to {
+    opacity: 0;
+    clip-path: inset(0 0 100% 0);
+  }
+}
+
+.unlicensed-mobile-nav.is-closing {
+  animation: mobile-nav-out 0.35s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+/* Nav list */
+.unlicensed-mobile-nav__nav {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  flex: 1;
+}
+
+.unlicensed-mobile-nav__item {
+  background: none;
+  border: none;
+  padding: 16px 0;
+  text-align: start;
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: 13px;
+  font-weight: 500;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--land-ink-muted);
+  cursor: pointer;
+  border-bottom: 1px solid var(--land-border-soft);
+  transition: color 0.2s, padding-left 0.25s cubic-bezier(0.22, 1, 0.36, 1);
+  opacity: 0;
+  animation: nav-item-in 0.45s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+}
+
+@keyframes nav-item-in {
+  from { opacity: 0; transform: translateY(12px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+.unlicensed-mobile-nav__item:hover {
+  color: var(--land-ink-soft);
+  padding-left: 12px;
+}
+
+.unlicensed-mobile-nav__item.active {
+  color: var(--land-ink);
+}
+
+/* Social row at bottom */
+.unlicensed-mobile-nav__footer {
+  padding-top: 36px;
+  border-top: 1px solid var(--land-border-soft);
+  margin-top: 24px;
+}
+
+/* RTL mobile nav adjustments */
+html[lang="ar"] .unlicensed-mobile-nav {
+  direction: rtl;
+}
+
+html[lang="ar"] .unlicensed-mobile-nav__item {
+  text-align: right;
+  padding-right: 0;
+  transition: color 0.2s, padding-right 0.25s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+html[lang="ar"] .unlicensed-mobile-nav__item:hover {
+  padding-left: 0;
+  padding-right: 12px;
+}
+
+html[lang="ar"] .unlicensed-topbar {
+  direction: ltr;
+}
+
+@media (max-width: 767px) {
+  .unlicensed-language-switch {
+    margin-bottom: 20px;
+  }
+}

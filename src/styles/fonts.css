@@ -1,0 +1,207 @@
+@import url('https://fonts.googleapis.com/css2?family=Baloo+Bhaijaan+2:wght@400;500;600;700;800&family=Space+Grotesk:wght@300;400;500&family=Space+Mono:wght@400;700&display=swap');
+
+@font-face {
+  font-family: 'Hacen Algeria';
+  src: url('../assets/Hacen-Algeria.ttf') format('truetype');
+  font-display: swap;
+}
+
+html[lang="ar"] body,
+html[lang="ar"] .land-heading,
+html[lang="ar"] .land-hero__title,
+html[lang="ar"] .land-btn--primary,
+html[lang="ar"] .land-btn--ghost,
+html[lang="ar"] .land-about__body,
+html[lang="ar"] .land-review-card__quote,
+html[lang="ar"] .land-review-card__author,
+html[lang="ar"] .land-review-card__role-badge,
+html[lang="ar"] .land-testimonial__quote,
+html[lang="ar"] .land-testimonial__author,
+html[lang="ar"] .land-testimonial__role,
+html[lang="ar"] .land-newsletter__heading,
+html[lang="ar"] .land-newsletter__sub,
+html[lang="ar"] .land-footer__tagline,
+html[lang="ar"] .land-footer__brand,
+html[lang="ar"] .land-footer__link,
+html[lang="ar"] .land-plan-card__name,
+html[lang="ar"] .land-plan-card__price,
+html[lang="ar"] .land-plan-card__feature,
+html[lang="ar"] .land-plan-card__cta,
+html[lang="ar"] .land-payment__blurb,
+html[lang="ar"] .land-newsletter__success,
+html[lang="ar"] .land-contact__office-hours,
+html[lang="ar"] .unlicensed-nav-item,
+html[lang="ar"] .unlicensed-mobile-nav__item {
+  font-family: 'Baloo Bhaijaan 2', 'Hacen Algeria', 'Segoe UI', Tahoma, sans-serif;
+}
+
+html[lang="ar"] .land-label,
+html[lang="ar"] .land-hero__eyebrow,
+html[lang="ar"] .land-hero__tag,
+html[lang="ar"] .land-project-card__tag,
+html[lang="ar"] .land-project-card__location,
+html[lang="ar"] .land-project-card__status,
+html[lang="ar"] .land-about__stat-desc,
+html[lang="ar"] .land-contact__info-label,
+html[lang="ar"] .land-form__label,
+html[lang="ar"] .land-footer__col-title,
+html[lang="ar"] .land-footer__copy,
+html[lang="ar"] .land-plan-card__sub,
+html[lang="ar"] .land-plan-card__badge,
+html[lang="ar"] .land-newsletter__fine-print,
+html[lang="ar"] .land-newsletter__confirmed,
+html[lang="ar"] .land-gallery__count,
+html[lang="ar"] .unlicensed-language-switch__label {
+  font-family: 'Baloo Bhaijaan 2', 'Hacen Algeria', 'Segoe UI', Tahoma, sans-serif;
+  letter-spacing: 0.06em;
+  text-transform: none;
+  line-height: 1.35;
+  font-size: 16px;
+}
+
+html[lang="ar"] .land-label,
+html[lang="ar"] .land-hero__tag,
+html[lang="ar"] .land-hero__eyebrow {
+  font-size: 16px;
+}
+
+html[lang="ar"] .land-hero__stat-label {
+  font-family: 'Baloo Bhaijaan 2', 'Hacen Algeria', 'Segoe UI', Tahoma, sans-serif;
+  font-size: 16px;
+  line-height: 1.45;
+  letter-spacing: 0.02em;
+  text-transform: none;
+}
+
+html[lang="ar"] .land-btn--primary,
+html[lang="ar"] .land-btn--ghost {
+  font-size: 15px;
+  letter-spacing: 0.04em;
+  text-transform: none;
+}
+
+html[lang="ar"] .land-heading,
+html[lang="ar"] .land-hero__title,
+html[lang="ar"] .land-about__body,
+html[lang="ar"] .land-review-card__quote,
+html[lang="ar"] .land-testimonial__quote,
+html[lang="ar"] .land-newsletter__heading,
+html[lang="ar"] .land-newsletter__sub,
+html[lang="ar"] .land-project-card__name,
+html[lang="ar"] .land-contact__info-value,
+html[lang="ar"] .land-footer__tagline,
+html[lang="ar"] .land-form__input,
+html[lang="ar"] .land-form__textarea,
+html[lang="ar"] .land-form__select {
+  direction: rtl;
+  unicode-bidi: plaintext;
+}
+
+html[lang="ar"] .land-heading {
+  line-height: 1.08;
+}
+
+html[lang="ar"] .land-hero__title {
+  display: inline-block;
+  text-align: right;
+  line-height: 1.16;
+}
+
+html[lang="ar"] .land-about__body,
+html[lang="ar"] .land-review-card__quote,
+html[lang="ar"] .land-newsletter__heading,
+html[lang="ar"] .land-newsletter__sub,
+html[lang="ar"] .land-newsletter__success,
+html[lang="ar"] .land-contact__office-hours,
+html[lang="ar"] .land-project-card__name,
+html[lang="ar"] .land-contact__info-value,
+html[lang="ar"] .land-footer__tagline {
+  text-align: right;
+}
+
+html[lang="ar"] .land-testimonial__quote {
+  text-align: center;
+}
+
+html[lang="ar"] .unlicensed-nav-item,
+html[lang="ar"] .unlicensed-mobile-nav__item {
+  letter-spacing: -0.01em;
+  text-transform: none;
+  font-size: 14px;
+  line-height: 1.5;
+}
+
+html[lang="ar"] .land-newsletter__fine-print {
+  font-size: 12px;
+  text-align: right;
+}
+
+html[lang="ar"] .unlicensed-language-switch__label {
+  font-size: 16px;
+  margin-bottom: 10px;
+  text-align: right;
+  letter-spacing: 0;
+}
+
+/* ── Arabic mobile adjustments ──────────────────────────── */
+@media (max-width: 767px) {
+  /* Labels group: keep Arabic font but let size scale down on mobile */
+  html[lang="ar"] .land-label,
+  html[lang="ar"] .land-hero__eyebrow,
+  html[lang="ar"] .land-hero__tag {
+    font-size: 12px;
+  }
+
+  html[lang="ar"] .land-hero__stat-label {
+    font-size: 11px;
+  }
+
+  html[lang="ar"] .land-about__stat-desc {
+    font-size: 10px;
+  }
+
+  html[lang="ar"] .land-project-card__tag,
+  html[lang="ar"] .land-project-card__location,
+  html[lang="ar"] .land-project-card__status {
+    font-size: 11px;
+  }
+
+  html[lang="ar"] .land-plan-card__sub,
+  html[lang="ar"] .land-plan-card__badge {
+    font-size: 11px;
+  }
+
+  html[lang="ar"] .land-newsletter__fine-print {
+    font-size: 10px;
+  }
+
+  html[lang="ar"] .land-footer__col-title,
+  html[lang="ar"] .land-footer__copy {
+    font-size: 11px;
+  }
+
+  html[lang="ar"] .land-contact__info-label,
+  html[lang="ar"] .land-form__label {
+    font-size: 11px;
+  }
+
+  /* Nav items */
+  html[lang="ar"] .unlicensed-mobile-nav__item {
+    font-size: 14px;
+  }
+
+  /* Buttons */
+  html[lang="ar"] .land-btn--primary,
+  html[lang="ar"] .land-btn--ghost {
+    font-size: 12px;
+  }
+
+  /* Review card */
+  html[lang="ar"] .land-review-card__role-badge {
+    font-size: 12px;
+  }
+
+  html[lang="ar"] .land-review-card__author {
+    font-size: 12px;
+  }
+}

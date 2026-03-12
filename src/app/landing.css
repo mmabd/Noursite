@@ -1,0 +1,2349 @@
+/* ============================================================
+   UNLICENSED — Landing page sections
+   ============================================================ */
+
+/* Global transitions */
+a,
+button {
+  transition: color 0.2s ease, background 0.2s ease, border-color 0.2s ease, box-shadow 0.2s ease, transform 0.2s ease, opacity 0.2s ease;
+}
+
+/* Scrollable main override */
+.unlicensed-main {
+  flex: 1;
+  overflow-y: auto;
+  overflow-x: hidden;
+  position: relative;
+}
+
+/* Global negative letter-spacing for nassgroup design */
+body {
+  letter-spacing: -0.02em;
+}
+
+/* ── Shared section tokens ─────────────────────────────────── */
+.land-section {
+  padding: 140px 80px;
+  background: var(--land-surface);
+}
+
+.land-section--dark {
+  background: linear-gradient(180deg, var(--land-card-dark-alt) 0%, var(--land-card-dark) 55%, var(--land-hero) 100%);
+  color: var(--land-inverse);
+}
+
+.land-section--mid {
+  background: linear-gradient(180deg, var(--land-surface-alt) 0%, var(--land-surface-strong) 100%);
+  color: var(--land-ink);
+}
+
+.land-section--off {
+  background: var(--land-surface-alt);
+}
+
+.land-label {
+  font-family: 'Space Mono', monospace;
+  font-size: 10px;
+  letter-spacing: 0.28em;
+  text-transform: uppercase;
+  color: var(--land-label);
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 24px;
+}
+
+.land-label::before {
+  content: '';
+  display: inline-block;
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--land-dot);
+  flex-shrink: 0;
+}
+
+.land-label--light { color: var(--land-label-light); }
+.land-label--white { color: var(--land-inverse-muted); }
+.land-label--white::before { background: var(--land-inverse-faint); }
+
+/* ── Section headings — more visible ──────────────────────── */
+.land-heading {
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: clamp(52px, 7.5vw, 100px);
+  font-weight: 800;
+  letter-spacing: -0.035em;
+  line-height: 0.95;
+  color: var(--land-ink);
+}
+
+.land-heading--white { color: var(--land-inverse); }
+
+/* ── Dividers ─────────────────────────────────────────────── */
+.land-divider {
+  width: 100%;
+  height: 1px;
+  background: var(--land-border-soft);
+  border: none;
+  margin: 0;
+}
+
+.land-divider--white { background: var(--land-inverse-faint); }
+
+/* ── Hero ─────────────────────────────────────────────────── */
+.land-hero {
+  position: relative;
+  height: 100vh;
+  min-height: 600px;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  overflow: hidden;
+  background: var(--land-hero);
+  border-radius: 0 0 24px 24px;
+}
+
+.land-hero__bg {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  opacity: 1;
+  animation: hero-scale 1.6s cubic-bezier(0.22, 1, 0.36, 1) both,
+             hero-slow-zoom 30s ease-in-out 1.6s infinite alternate;
+}
+
+@keyframes hero-scale {
+  from { opacity: 0; transform: scale(1.06); }
+  to   { opacity: 1; transform: scale(1); }
+}
+
+@keyframes hero-slow-zoom {
+  from { transform: scale(1); }
+  to   { transform: scale(1.08); }
+}
+
+.land-hero__overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    to top,
+    rgba(4, 17, 13, 0.45) 0%,
+    rgba(4, 17, 13, 0.15) 40%,
+    transparent 55%
+  );
+}
+
+.land-hero__tag {
+  position: absolute;
+  top: 40px;
+  right: 48px;
+  font-family: 'Space Mono', monospace;
+  font-size: 9px;
+  letter-spacing: 0.22em;
+  color: var(--land-inverse-muted);
+  text-transform: uppercase;
+  animation: fade-in-down 1s 0.4s cubic-bezier(0.22,1,0.36,1) both;
+}
+
+.land-hero__content {
+  position: relative;
+  z-index: 2;
+  padding: 0 60px 60px;
+}
+
+.land-hero__eyebrow {
+  font-family: 'Space Mono', monospace;
+  font-size: 9px;
+  letter-spacing: 0.28em;
+  color: var(--land-inverse-muted);
+  text-transform: uppercase;
+  margin-bottom: 20px;
+  animation: fade-in-up 0.9s 0.5s cubic-bezier(0.22,1,0.36,1) both;
+}
+
+.land-hero__title {
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: clamp(56px, 9vw, 108px);
+  font-weight: 800;
+  letter-spacing: -0.04em;
+  line-height: 0.92;
+  color: var(--land-inverse);
+  margin-bottom: 44px;
+  animation: fade-in-up 1s 0.65s cubic-bezier(0.22,1,0.36,1) both;
+}
+
+.land-hero__actions {
+  display: flex;
+  align-items: center;
+  gap: 32px;
+  animation: fade-in-up 0.9s 0.85s cubic-bezier(0.22,1,0.36,1) both;
+}
+
+@keyframes fade-in-up {
+  from { opacity: 0; transform: translateY(28px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes fade-in-down {
+  from { opacity: 0; transform: translateY(-16px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+.land-hero__stats {
+  position: relative;
+  z-index: 2;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  border-top: 1px solid var(--land-inverse-faint);
+  animation: fade-in-up 0.9s 1.1s cubic-bezier(0.22,1,0.36,1) both;
+}
+
+.land-hero__stat {
+  padding: 24px 32px;
+  border-inline-end: 1px solid var(--land-inverse-faint);
+}
+
+.land-hero__stat:last-child { border-inline-end: none; }
+
+.land-hero__stat-num {
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: 28px;
+  font-weight: 700;
+  color: var(--land-inverse);
+  letter-spacing: -0.02em;
+}
+
+.land-hero__stat-label {
+  font-family: 'Space Mono', monospace;
+  font-size: 8px;
+  letter-spacing: 0.2em;
+  color: var(--land-inverse);
+  text-transform: uppercase;
+  margin-top: 4px;
+}
+
+/* ── Buttons ──────────────────────────────────────────────── */
+.land-btn--primary {
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: 14px;
+  font-weight: 600;
+  letter-spacing: -0.02em;
+  text-transform: none;
+  background: var(--land-ink);
+  color: var(--land-inverse);
+  border: none;
+  padding: 14px 28px;
+  border-radius: 144px;
+  cursor: pointer;
+  transition: background 0.2s ease, box-shadow 0.2s ease, transform 0.2s ease;
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.land-btn--primary::after {
+  content: '';
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--land-dot);
+  flex-shrink: 0;
+}
+
+.land-btn--primary:hover {
+  background: #2d2d2d;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.15);
+  transform: translateY(-2px);
+}
+
+.land-btn--ghost {
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: 11px;
+  font-weight: 500;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  background: transparent;
+  color: var(--land-inverse-muted);
+  border: none;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  transition: color 0.2s;
+}
+
+.land-btn--ghost:hover { color: var(--land-inverse); }
+
+/* Arrow icons inside buttons — universal animation */
+.land-btn__arrow-icon {
+  transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+  flex-shrink: 0;
+}
+
+/* Horizontal arrows slide in their direction on hover */
+.land-btn--ghost:hover .land-btn__arrow-icon:not(.land-btn__arrow-icon--down) {
+  transform: translateX(-3px);
+}
+
+/* Right-pointing arrows go right */
+.land-btn--ghost:hover .land-btn__arrow-icon:last-child:not(.land-btn__arrow-icon--down) {
+  transform: translateX(3px);
+}
+
+/* Down-pointing arrows bounce down */
+.land-btn__arrow-icon--down {
+  transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+}
+.land-btn--arrow-down:hover .land-btn__arrow-icon--down {
+  transform: translateY(3px);
+}
+
+/* Back button arrow (project page) */
+.land-btn--ghost:not(.land-btn--arrow-down):hover svg:first-child {
+  transform: translateX(-3px);
+  transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+}
+.land-btn--ghost:not(.land-btn--arrow-down) svg:first-child {
+  transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+/* Project prev/next navigation arrows */
+.land-nav-arrow {
+  transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+  flex-shrink: 0;
+}
+
+.land-proj-nav--prev:hover .land-nav-arrow--prev {
+  transform: translateX(-4px);
+}
+
+.land-proj-nav--next:hover .land-nav-arrow--next {
+  transform: translateX(4px);
+}
+
+/* RTL: flip horizontal arrows */
+html[lang="ar"] .land-nav-arrow--prev { transform: scaleX(-1); }
+html[lang="ar"] .land-proj-nav--prev:hover .land-nav-arrow--prev { transform: scaleX(-1) translateX(-4px); }
+html[lang="ar"] .land-nav-arrow--next { transform: scaleX(-1); }
+html[lang="ar"] .land-proj-nav--next:hover .land-nav-arrow--next { transform: scaleX(-1) translateX(4px); }
+/* Back button arrow stays ← in all languages (universal "go back") */
+
+/* ── "View All" button — rebuilt ─────────────────────────── */
+.land-view-all {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  gap: 14px;
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: 14px;
+  font-weight: 600;
+  letter-spacing: -0.02em;
+  text-transform: none;
+  color: var(--land-inverse);
+  background: var(--land-ink);
+  border: none;
+  padding: 14px 28px;
+  border-radius: 144px;
+  cursor: pointer;
+  overflow: hidden;
+  transition: color 0.2s ease, background 0.2s ease, border-color 0.2s ease, box-shadow 0.2s ease, transform 0.2s ease, opacity 0.2s ease;
+  white-space: nowrap;
+}
+
+.land-view-all::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: #333333;
+  border-radius: 100px;
+  transform: translateX(-101%);
+  transition: transform 0.4s cubic-bezier(0.22,1,0.36,1);
+  z-index: 0;
+}
+
+.land-view-all:hover::before { transform: translateX(0); }
+.land-view-all:hover { color: var(--land-inverse); transform: translateY(-2px); box-shadow: 0 8px 24px rgba(0, 0, 0, 0.15); }
+
+.land-view-all span,
+.land-view-all svg {
+  position: relative;
+  z-index: 1;
+}
+
+.land-view-all__arrow {
+  width: 16px;
+  height: 16px;
+  transition: transform 0.3s cubic-bezier(0.22,1,0.36,1);
+}
+
+.land-view-all:hover .land-view-all__arrow {
+  transform: translateX(4px);
+}
+
+/* ── Projects ─────────────────────────────────────────────── */
+.land-projects__header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  margin-bottom: 52px;
+}
+
+.land-projects__grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 3px;
+}
+
+.land-project-card {
+  position: relative;
+  overflow: hidden;
+  aspect-ratio: 4/3;
+  cursor: pointer;
+  background: var(--land-card-dark);
+  border-radius: 16px;
+  transition: transform 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94), box-shadow 0.4s ease;
+}
+
+.land-project-card img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.65s cubic-bezier(0.25, 0.46, 0.45, 0.94), opacity 0.4s;
+  opacity: 0.75;
+}
+
+.land-project-card:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.08);
+}
+
+.land-project-card--static,
+.land-project-card--static:hover {
+  transform: none !important;
+  box-shadow: none !important;
+  transition: none !important;
+}
+
+.land-project-card:hover img {
+  transform: scale(1.04);
+  opacity: 0.9;
+}
+
+.land-project-card__overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(to top, rgba(25, 18, 11, 0.85) 0%, transparent 55%);
+}
+
+.land-project-card__info {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  padding: 28px 28px 24px;
+}
+
+.land-project-card__tag {
+  font-family: 'Space Mono', monospace;
+  font-size: 8px;
+  letter-spacing: 0.2em;
+  color: var(--land-inverse-muted);
+  text-transform: uppercase;
+  margin-bottom: 8px;
+}
+
+.land-project-card__name {
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: 18px;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  color: var(--land-inverse);
+  margin-bottom: 8px;
+}
+
+.land-project-card__meta {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.land-project-card__location {
+  font-family: 'Space Mono', monospace;
+  font-size: 8px;
+  letter-spacing: 0.15em;
+  color: var(--land-inverse-faint);
+}
+
+.land-project-card__status {
+  font-family: 'Space Mono', monospace;
+  font-size: 8px;
+  letter-spacing: 0.15em;
+  padding: 4px 10px;
+  text-transform: uppercase;
+  border-radius: 20px;
+}
+
+.land-project-card__status--active {
+  background: var(--land-status-available-soft);
+  color: var(--land-inverse);
+}
+
+.land-project-card__status--completed {
+  background: var(--land-status-reserved-soft);
+  color: var(--land-inverse);
+}
+
+/* ── About ────────────────────────────────────────────────── */
+.land-about__grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 80px;
+  align-items: center;
+}
+
+.land-about__body {
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: 15px;
+  line-height: 1.75;
+  color: var(--land-ink-soft);
+  margin: 28px 0 44px;
+  max-width: 440px;
+}
+
+.land-about__stats {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 0;
+  background: transparent;
+}
+
+.land-about__stat {
+  background: var(--land-card-alt);
+  padding: 24px 20px;
+  border: 1px solid var(--land-border-soft);
+  margin-right: -1px;
+  margin-bottom: -1px;
+}
+
+.land-about__stat-num {
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: 32px;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  color: var(--land-ink);
+}
+
+.land-about__stat-desc {
+  font-family: 'Space Mono', monospace;
+  font-size: 8px;
+  letter-spacing: 0.18em;
+  color: var(--land-ink-muted);
+  text-transform: uppercase;
+  margin-top: 6px;
+}
+
+.land-about__image {
+  width: 100%;
+  aspect-ratio: 4/5;
+  object-fit: cover;
+  display: block;
+  border-radius: 16px;
+}
+
+/* ── Gallery ──────────────────────────────────────────────── */
+.land-gallery__header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+}
+
+.land-gallery__grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  grid-template-rows: 280px 280px;
+  gap: 3px;
+  margin-top: 48px;
+}
+
+.land-gallery__item {
+  overflow: hidden;
+  position: relative;
+  background: rgba(249, 239, 216, 0.06);
+  border-radius: 16px;
+  transition: color 0.2s ease, background 0.2s ease, border-color 0.2s ease, box-shadow 0.2s ease, transform 0.2s ease, opacity 0.2s ease;
+}
+
+.land-gallery__item--wide { grid-column: span 2; }
+.land-gallery__item--tall { grid-row: span 2; }
+
+.land-gallery__count {
+  font-family: 'Space Mono', monospace;
+  font-size: 9px;
+  letter-spacing: 0.2em;
+  color: var(--land-inverse-faint);
+}
+
+.land-gallery__item img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.65s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+
+.land-gallery__item:hover img { transform: scale(1.08); }
+
+/* ── Reviews / Slider ────────────────────────────────────── */
+/* ── Testimonial — Editorial Large Quote ─────────────────── */
+.land-testimonial {
+  margin-top: 48px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  padding: 48px 48px 90px;
+  background: #ffffff;
+  border: none;
+  border-radius: 20px;
+  position: relative;
+  outline: none;
+  box-shadow: 0 2px 8px rgba(26, 26, 26, 0.06);
+  min-height: 520px;
+}
+
+html[lang="ar"] .land-testimonial {
+  direction: rtl;
+}
+
+html[lang="ar"] .land-testimonial__mark-icon {
+  transform: scaleX(-1);
+}
+
+html[lang="ar"] .land-testimonial__mark-icon--flip {
+  transform: rotate(180deg) scaleX(-1);
+}
+
+/* Quote mark pairs container */
+.land-testimonial__marks {
+  display: flex;
+  gap: 6px;
+}
+
+.land-testimonial__marks--top {
+  position: absolute;
+  top: -16px;
+  right: 0;
+}
+
+.land-testimonial__marks--bottom {
+  position: absolute;
+  bottom: -16px;
+  left: 0;
+}
+
+/* Individual quote mark icon */
+.land-testimonial__mark-icon {
+  width: 32px;
+  height: auto;
+  opacity: 1;
+  user-select: none;
+}
+
+/* Rotated 180° for closing quotes (top) */
+.land-testimonial__mark-icon--flip {
+  transform: rotate(180deg);
+}
+
+/* Quote body container — fixed height so card never shifts */
+.land-testimonial__body {
+  max-width: 780px;
+  width: 100%;
+  height: 200px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  overflow: visible;
+}
+
+/* Quote text */
+.land-testimonial__quote {
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: clamp(18px, 2.2vw, 24px);
+  line-height: 1.8;
+  color: var(--land-ink);
+  font-weight: 400;
+  font-style: normal;
+  letter-spacing: -0.02em;
+}
+
+/* Divider */
+.land-testimonial__divider {
+  width: 28px;
+  height: 3px;
+  background: var(--land-ink);
+  opacity: 1;
+  margin: 24px auto;
+  border-radius: 2px;
+}
+
+/* Attribution */
+.land-testimonial__attribution {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 6px;
+}
+
+/* ── Staggered entrance animation for all elements ── */
+@keyframes testimonialSlideIn {
+  0% {
+    opacity: 0;
+    transform: translateY(28px) scale(0.97);
+    filter: blur(4px);
+  }
+  60% {
+    opacity: 0.8;
+    filter: blur(0px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+    filter: blur(0px);
+  }
+}
+
+.land-testimonial__anim {
+  opacity: 0;
+  animation: testimonialSlideIn 0.9s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+}
+
+.land-testimonial__anim--d0 { animation-delay: 0.05s; }
+.land-testimonial__anim--d1 { animation-delay: 0.2s; }
+.land-testimonial__anim--d2 { animation-delay: 0.4s; }
+.land-testimonial__anim--d3 { animation-delay: 0.55s; }
+.land-testimonial__anim--d4 { animation-delay: 0.7s; }
+
+.land-testimonial__author {
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: 15px;
+  font-weight: 600;
+  letter-spacing: -0.02em;
+  color: var(--land-ink);
+  text-transform: none;
+}
+
+.land-testimonial__role {
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: 13px;
+  letter-spacing: -0.01em;
+  color: var(--land-ink-muted);
+  text-transform: none;
+}
+
+/* Navigation row — pinned to bottom of card */
+.land-testimonial__nav {
+  position: absolute;
+  bottom: 40px;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+.land-testimonial__arrow {
+  width: 32px;
+  height: 32px;
+  border-radius: 0;
+  border: none;
+  background: transparent;
+  color: var(--land-ink-muted);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: color 0.2s ease;
+  padding: 0;
+}
+
+.land-testimonial__arrow:hover {
+  color: var(--land-ink);
+}
+
+html[lang="ar"] .land-testimonial__arrow svg {
+  transform: scaleX(-1);
+}
+
+/* Dots */
+.land-testimonial__dots {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+}
+
+.land-testimonial__dot {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  border: none;
+  background: rgba(0, 0, 0, 0.12);
+  cursor: pointer;
+  padding: 0;
+  transition: color 0.2s ease, background 0.2s ease, border-color 0.2s ease, box-shadow 0.2s ease, transform 0.2s ease, opacity 0.2s ease;
+}
+
+.land-testimonial__dot:hover {
+  background: rgba(0, 0, 0, 0.3);
+}
+
+.land-testimonial__dot--active {
+  background: var(--land-ink);
+  transform: scale(1.15);
+}
+
+/* ─ Payment ──────────────────────────────────────────────── */
+.land-payment__header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  gap: 24px;
+}
+
+.land-payment__blurb {
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: 18px;
+  color: var(--land-ink-soft);
+  max-width: 280px;
+  text-align: right;
+  line-height: 1.6;
+  flex-shrink: 0;
+}
+
+.land-payment__grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 20px;
+  background: transparent;
+  margin-top: 52px;
+  align-items: stretch;
+}
+
+.land-plan-card {
+  background: var(--land-card);
+  padding: 40px 32px 36px;
+  position: relative;
+  border: 1px solid var(--land-border-soft);
+  border-radius: 20px;
+  display: flex;
+  flex-direction: column;
+  transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1),
+              box-shadow 0.4s cubic-bezier(0.16, 1, 0.3, 1),
+              border-color 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.land-plan-card:not(.land-plan-card--featured):hover {
+  transform: translateY(-4px);
+  box-shadow: 0 16px 40px rgba(26, 26, 26, 0.08);
+  border-color: rgba(0, 0, 0, 0.12);
+}
+
+@keyframes card-slide-up {
+  from {
+    opacity: 0;
+    transform: translateY(36px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes card-slide-up-featured {
+  from {
+    opacity: 0;
+    transform: translateY(36px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(-16px);
+  }
+}
+
+.land-plan-card--animate {
+  opacity: 0;
+  animation: card-slide-up 800ms cubic-bezier(0.22, 1, 0.36, 1) both;
+  animation-delay: var(--card-delay, 0ms);
+}
+
+.land-plan-card--featured.land-plan-card--animate {
+  animation-name: card-slide-up-featured;
+}
+
+.land-plan-card--featured {
+  background: linear-gradient(165deg, #222222 0%, #1a1a1a 100%);
+  border-color: transparent;
+  transform: translateY(-16px);
+  box-shadow: 0 24px 56px rgba(26, 26, 26, 0.18);
+  z-index: 2;
+  padding: 44px 36px 40px;
+}
+
+.land-plan-card--featured:hover {
+  transform: translateY(-22px);
+  box-shadow: 0 32px 72px rgba(26, 26, 26, 0.24);
+}
+
+.land-plan-card__top {
+  min-height: 32px;
+  margin-bottom: 8px;
+}
+
+.land-plan-card__badge {
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: -0.02em;
+  text-transform: none;
+  color: var(--land-ink);
+  background: #ffffff;
+  display: inline-block;
+  padding: 6px 16px;
+  border-radius: 100px;
+}
+
+.land-plan-card__name {
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--land-ink-muted);
+  margin-bottom: 20px;
+}
+
+.land-plan-card--featured .land-plan-card__name {
+  color: var(--land-inverse-muted);
+}
+
+.land-plan-card__price-block {
+  margin-bottom: 0;
+}
+
+.land-plan-card__price {
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: 44px;
+  font-weight: 800;
+  letter-spacing: -0.03em;
+  color: var(--land-ink);
+  line-height: 1;
+  margin-bottom: 8px;
+}
+
+.land-plan-card--featured .land-plan-card__price { color: var(--land-inverse); }
+
+.land-plan-card__sub {
+  font-family: 'Space Mono', monospace;
+  font-size: 10px;
+  letter-spacing: 0.15em;
+  color: var(--land-ink-muted);
+  text-transform: uppercase;
+}
+
+.land-plan-card--featured .land-plan-card__sub { color: var(--land-inverse-faint); }
+
+.land-plan-card__divider {
+  width: 100%;
+  height: 1px;
+  background: var(--land-border-soft);
+  margin: 28px 0;
+}
+
+.land-plan-card--featured .land-plan-card__divider {
+  background: rgba(255, 255, 255, 0.1);
+}
+
+.land-plan-card__features {
+  list-style: none;
+  padding: 0;
+  margin: 0 0 36px;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  flex: 1;
+}
+
+.land-plan-card__feature {
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: 14px;
+  color: var(--land-ink-soft);
+  display: flex;
+  align-items: flex-start;
+  gap: 14px;
+  line-height: 1.5;
+}
+
+.land-plan-card--featured .land-plan-card__feature { color: rgba(255, 255, 255, 0.88); }
+
+.land-plan-card__feature::before {
+  content: none; /* removed — using check span instead */
+}
+
+.land-plan-card__feature-check {
+  font-size: 13px;
+  color: var(--land-dot);
+  flex-shrink: 0;
+  font-weight: 600;
+  width: 22px;
+  height: 22px;
+  border-radius: 50%;
+  background: rgba(243, 53, 12, 0.08);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-top: 0;
+}
+
+.land-plan-card--featured .land-plan-card__feature-check {
+  background: rgba(255, 255, 255, 0.15);
+  color: #ffffff;
+}
+
+.land-plan-card__cta {
+  width: 100%;
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: 14px;
+  font-weight: 600;
+  letter-spacing: -0.02em;
+  text-transform: none;
+  padding: 16px;
+  cursor: pointer;
+  transition: background 0.2s ease, color 0.2s ease, border-color 0.2s ease, box-shadow 0.2s ease, transform 0.2s ease;
+  border: 1.5px solid rgba(0, 0, 0, 0.12);
+  background: transparent;
+  color: var(--land-ink);
+  border-radius: 12px;
+  position: relative;
+  overflow: hidden;
+}
+
+.land-plan-card__cta:hover {
+  background: var(--land-ink);
+  color: #ffffff;
+  border-color: var(--land-ink);
+}
+
+.land-plan-card--featured .land-plan-card__cta {
+  background: #ffffff;
+  color: var(--land-ink);
+  border: none;
+}
+
+.land-plan-card--featured .land-plan-card__cta:hover {
+  background: rgba(255, 255, 255, 0.85);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.15);
+  transform: translateY(-1px);
+}
+
+/* ── Contact ────────────────────────────���─────────────────── */
+.land-contact__grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 80px;
+  margin-top: 52px;
+}
+
+.land-contact__info-item { margin-bottom: 36px; }
+
+.land-contact__info-label {
+  font-family: 'Space Mono', monospace;
+  font-size: 8px;
+  letter-spacing: 0.22em;
+  color: var(--land-ink-muted);
+  text-transform: uppercase;
+  margin-bottom: 8px;
+}
+
+.land-contact__info-value {
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: 15px;
+  color: var(--land-ink);
+}
+
+.land-contact__office-hours {
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: 13px;
+  color: var(--land-ink-soft);
+  line-height: 1.8;
+}
+
+.land-form__row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+  margin-bottom: 16px;
+}
+
+.land-form__field {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  margin-bottom: 16px;
+}
+
+.land-form__label {
+  font-family: 'Space Mono', monospace;
+  font-size: 8px;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--land-ink-muted);
+}
+
+.land-form__input,
+.land-form__textarea,
+.land-form__select {
+  background: transparent;
+  border: none;
+  border-bottom: 1px solid var(--land-border);
+  padding: 10px 0;
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: 14px;
+  color: var(--land-ink);
+  outline: none;
+  width: 100%;
+  transition: border-color 0.2s;
+  appearance: none;
+}
+
+.land-form__input:focus,
+.land-form__textarea:focus,
+.land-form__select:focus { border-bottom-color: var(--land-ink); }
+
+.land-form__textarea { resize: none; min-height: 100px; }
+
+.land-form__submit {
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: 14px;
+  font-weight: 600;
+  letter-spacing: -0.02em;
+  text-transform: none;
+  background: var(--land-ink);
+  color: #ffffff;
+  border: none;
+  padding: 16px 36px;
+  border-radius: 16px;
+  cursor: pointer;
+  margin-top: 16px;
+  transition: color 0.2s ease, background 0.2s ease, border-color 0.2s ease, box-shadow 0.2s ease, transform 0.2s ease, opacity 0.2s ease;
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  box-shadow: rgba(0, 0, 0, 0.2) 0px 16px 28px 0px;
+}
+
+.land-form__submit-arrow {
+  display: inline-flex;
+  align-items: center;
+  transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.land-form__submit:hover { background: #333333; transform: translateY(-2px); box-shadow: rgba(0, 0, 0, 0.25) 0px 20px 32px 0px; }
+.land-form__submit:hover .land-form__submit-arrow {
+  transform: translateX(5px);
+}
+
+html[lang="ar"] .land-form__submit-arrow {
+  transform: scaleX(-1);
+}
+html[lang="ar"] .land-form__submit:hover .land-form__submit-arrow {
+  transform: scaleX(-1) translateX(5px);
+}
+
+/* ── Newsletter ───────────────────────────────────────────── */
+.land-newsletter {
+  background: #ffffff;
+  color: var(--land-ink);
+  padding: 64px 48px 40px;
+  display: grid;
+  grid-template-columns: 1.2fr 1fr;
+  align-items: center;
+  gap: 80px;
+  position: relative;
+  overflow: hidden;
+  border-radius: 20px;
+  margin: 12px 12px 12px;
+  box-shadow: 0 2px 8px rgba(26, 26, 26, 0.06);
+}
+
+.land-newsletter::before {
+  content: none;
+}
+
+.land-newsletter > * {
+  position: relative;
+  z-index: 1;
+}
+
+.land-newsletter__left { max-width: 480px; }
+
+.land-newsletter .land-label {
+  color: rgba(0, 0, 0, 0.4);
+}
+.land-newsletter .land-label::before {
+  background: var(--land-dot);
+}
+
+.land-newsletter__heading {
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: clamp(24px, 3vw, 36px);
+  font-weight: 600;
+  letter-spacing: -0.02em;
+  color: var(--land-ink);
+  margin-top: 20px;
+  margin-bottom: 24px;
+  line-height: 1.2;
+}
+
+.land-newsletter__sub {
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: 15px;
+  color: rgba(0, 0, 0, 0.6);
+  line-height: 1.6;
+  max-width: 480px;
+}
+
+.land-newsletter__fine-print {
+  font-family: 'Space Mono', monospace;
+  font-size: 10px;
+  letter-spacing: 0.15em;
+  color: var(--land-ink-muted);
+  margin-top: 24px;
+}
+
+.land-newsletter__success {
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: 15px;
+  color: var(--land-ink);
+  line-height: 1.6;
+}
+
+.land-newsletter__confirmed {
+  font-family: 'Space Mono', monospace;
+  font-size: 9px;
+  letter-spacing: 0.22em;
+  color: rgba(0, 0, 0, 0.5);
+  margin-bottom: 12px;
+}
+
+.land-newsletter__form-inner {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+}
+
+.land-newsletter__form {
+  max-width: 440px;
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+  justify-self: end;
+  width: 100%;
+}
+
+.land-newsletter__input {
+  flex: 1;
+  background: rgb(241, 239, 237);
+  border: none;
+  border-radius: 12px;
+  padding: 16px 24px;
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: 14px;
+  color: var(--land-ink);
+  outline: none;
+  transition: color 0.2s ease, background 0.2s ease, border-color 0.2s ease, box-shadow 0.2s ease, transform 0.2s ease, opacity 0.2s ease;
+}
+
+.land-newsletter__input:focus {
+  background: #f5f3f0;
+  outline: 2px solid rgba(243, 53, 12, 0.3);
+  outline-offset: -2px;
+}
+
+.land-newsletter__input::placeholder {
+  color: rgba(0, 0, 0, 0.4);
+  font-size: 14px;
+  letter-spacing: -0.02em;
+}
+
+.land-newsletter__btn {
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: 14px;
+  font-weight: 600;
+  letter-spacing: -0.02em;
+  text-transform: none;
+  background: rgb(36, 36, 36);
+  color: #ffffff;
+  border: none;
+  padding: 12px 24px;
+  cursor: pointer;
+  white-space: nowrap;
+  border-radius: 16px;
+  margin-top: 24px;
+  align-self: flex-start;
+  transition: color 0.2s ease, background 0.2s ease, border-color 0.2s ease, box-shadow 0.2s ease, transform 0.2s ease, opacity 0.2s ease;
+  position: relative;
+  overflow: hidden;
+  box-shadow: rgba(0, 0, 0, 0.25) 0px 22px 33px 0px, rgba(255, 255, 255, 0.12) 0px 1px 0px 0px inset;
+}
+
+.land-newsletter__btn:hover {
+  background: #1a1a1a;
+  box-shadow: rgba(0, 0, 0, 0.35) 0px 28px 42px 0px, rgba(255, 255, 255, 0.12) 0px 1px 0px 0px inset;
+  transform: translateY(-2px);
+}
+
+/* ── Footer ───────────────────────────────────────────────── */
+.land-footer {
+  background: #ffffff;
+  border-radius: 20px;
+  margin: 0 12px 12px;
+  padding: 64px 48px 40px;
+  color: rgba(0, 0, 0, 0.6);
+  box-shadow: 0 2px 8px rgba(26, 26, 26, 0.06);
+}
+
+.land-footer__top {
+  display: grid;
+  grid-template-columns: 1.4fr 1fr 1fr 1fr;
+  gap: 48px;
+  padding-bottom: 56px;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+}
+
+.land-footer__brand {
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: 15px;
+  font-weight: 700;
+  letter-spacing: 0.22em;
+  color: var(--land-ink);
+  margin-bottom: 16px;
+}
+
+.land-footer__logo {
+  height: 32px;
+  width: auto;
+  margin-bottom: 16px;
+  filter: none;
+}
+
+.land-footer__tagline {
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: 15px;
+  color: rgba(0, 0, 0, 0.5);
+  line-height: 1.65;
+  max-width: 240px;
+}
+
+.land-footer__col-title {
+  font-family: 'Space Mono', monospace;
+  font-size: 10px;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: rgba(0, 0, 0, 0.4);
+  margin-bottom: 20px;
+}
+
+.land-footer__links {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.land-footer__link {
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: 15px;
+  color: rgba(0, 0, 0, 0.6);
+  cursor: pointer;
+  transition: color 0.2s ease, background 0.2s ease, border-color 0.2s ease, box-shadow 0.2s ease, transform 0.2s ease, opacity 0.2s ease;
+}
+
+.land-footer__link:hover { color: rgb(0, 0, 0); }
+
+.land-footer__bottom {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding-top: 28px;
+}
+
+.land-footer__copy {
+  font-family: 'Space Mono', monospace;
+  font-size: 10px;
+  letter-spacing: 0.15em;
+  color: rgba(0, 0, 0, 0.4);
+  text-transform: uppercase;
+}
+
+.land-footer__socials { display: flex; gap: 20px; }
+
+.land-footer__social {
+  color: rgba(0, 0, 0, 0.5);
+  transition: color 0.2s ease, background 0.2s ease, border-color 0.2s ease, box-shadow 0.2s ease, transform 0.2s ease, opacity 0.2s ease;
+  cursor: pointer;
+}
+
+.land-footer__social:hover { color: rgb(0, 0, 0); }
+
+/* ── Global RTL for Arabic ───────────────────────────────── */
+html[lang="ar"] .land-section,
+html[lang="ar"] .land-section--dark,
+html[lang="ar"] .land-section--mid,
+html[lang="ar"] .land-section--off {
+  direction: rtl;
+  text-align: right;
+}
+
+html[lang="ar"] .land-hero__content {
+  direction: rtl;
+  text-align: right;
+}
+
+html[lang="ar"] .land-heading {
+  text-align: right;
+}
+
+html[lang="ar"] .land-view-all__arrow {
+  transform: scaleX(-1);
+}
+
+html[lang="ar"] .land-view-all:hover .land-view-all__arrow {
+  transform: scaleX(-1) translateX(4px);
+}
+
+html[lang="ar"] .land-view-all::before {
+  transform: translateX(101%);
+}
+
+html[lang="ar"] .land-view-all:hover::before {
+  transform: translateX(0);
+}
+
+html[lang="ar"] .land-payment__blurb {
+  text-align: left;
+}
+
+html[lang="ar"] .land-newsletter {
+  direction: rtl;
+}
+
+html[lang="ar"] .land-newsletter__left {
+  text-align: right;
+}
+
+/* ── Footer RTL ──────────────────────────────────────────── */
+html[lang="ar"] .land-footer__top {
+  direction: rtl;
+}
+
+html[lang="ar"] .land-footer__bottom {
+  direction: rtl;
+}
+
+html[lang="ar"] .land-footer__links {
+  text-align: right;
+}
+
+/* ============================================================
+   RESPONSIVE — Tablet (768–1024px)
+   ============================================================ */
+
+@media (max-width: 1024px) and (min-width: 768px) {
+
+  .land-section,
+  .land-section--dark,
+  .land-section--mid,
+  .land-section--off {
+    padding: 72px 40px;
+  }
+
+  .land-hero__content {
+    padding: 0 40px 40px;
+  }
+
+  .land-hero__stats {
+    grid-template-columns: repeat(4, 1fr);
+  }
+
+  .land-hero__stat {
+    padding: 20px 24px;
+  }
+
+  .land-hero__stat-num {
+    font-size: 24px;
+  }
+
+  .land-about__grid {
+    gap: 40px;
+  }
+
+  .land-about__body {
+    max-width: 100%;
+  }
+
+  .land-gallery__grid {
+    grid-template-rows: 220px 220px;
+  }
+
+  .land-testimonial {
+    padding: 48px 32px 40px;
+  }
+
+  .land-payment__grid {
+    gap: 16px;
+  }
+
+  .land-plan-card {
+    padding: 32px 24px 28px;
+  }
+
+  .land-plan-card__price {
+    font-size: 36px;
+  }
+
+  .land-plan-card--featured {
+    padding: 36px 28px 32px;
+  }
+
+  .land-contact__grid {
+    gap: 40px;
+    margin-top: 40px;
+  }
+
+  .land-newsletter {
+    padding: 60px 40px;
+    gap: 40px;
+    margin: 0 16px 16px;
+    border-radius: 16px;
+  }
+
+  .land-footer {
+    padding: 48px 40px 28px;
+    margin: 0 16px 16px;
+    border-radius: 16px;
+  }
+
+  .land-footer__top {
+    gap: 36px;
+  }
+
+  /* Project page */
+  .proj-overview {
+    gap: 40px;
+  }
+}
+
+/* ============================================================
+   RESPONSIVE — Mobile (≤767px)
+   ============================================================ */
+
+@media (max-width: 767px) {
+
+  /* ── Shared section padding ── */
+  .land-section,
+  .land-section--dark,
+  .land-section--mid,
+  .land-section--off {
+    padding: 48px 20px;
+  }
+
+  /* ── Headings ── */
+  .land-heading {
+    font-size: clamp(32px, 8vw, 52px);
+  }
+
+  /* ── Hero ── */
+  .land-hero {
+    min-height: 100svh;
+  }
+
+  .land-hero__tag {
+    top: 16px;
+    right: 16px;
+    font-size: 8px;
+  }
+
+  .land-hero__content {
+    padding: 0 20px 20px;
+  }
+
+  .land-hero__eyebrow {
+    font-size: 8px;
+    margin-bottom: 14px;
+  }
+
+  .land-hero__title {
+    font-size: clamp(36px, 11vw, 64px);
+    margin-bottom: 24px;
+    letter-spacing: -0.03em;
+  }
+
+  .land-hero__actions {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 14px;
+  }
+
+  .land-btn--primary {
+    font-size: 10px;
+    padding: 12px 24px;
+  }
+
+  .land-btn--ghost {
+    font-size: 10px;
+  }
+
+  .land-hero__stats {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .land-hero__stat {
+    padding: 14px 16px;
+  }
+
+  .land-hero__stat-num {
+    font-size: 20px;
+  }
+
+  .land-hero__stat-label {
+    font-size: 7px;
+    letter-spacing: 0.15em;
+  }
+
+  /* ── Projects ── */
+  .land-projects__header {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 16px;
+    margin-bottom: 24px;
+  }
+
+  .land-projects__grid {
+    grid-template-columns: 1fr;
+    gap: 3px;
+  }
+
+  .land-project-card {
+    aspect-ratio: 16/10;
+  }
+
+  .land-project-card__info {
+    padding: 20px;
+  }
+
+  .land-project-card__name {
+    font-size: 16px;
+  }
+
+  /* ── About ── */
+  .land-about__grid {
+    grid-template-columns: 1fr;
+    gap: 32px;
+  }
+
+  .land-about__grid > :last-child {
+    order: -1; /* image above text */
+  }
+
+  .land-about__image {
+    aspect-ratio: 16/10;
+  }
+
+  .land-about__body {
+    max-width: 100%;
+    margin: 16px 0 24px;
+    font-size: 14px;
+  }
+
+  .land-about__stats {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .land-about__stat {
+    padding: 20px 16px;
+  }
+
+  .land-about__stat-num {
+    font-size: 26px;
+  }
+
+  .land-about__stat-desc {
+    font-size: 7px;
+    letter-spacing: 0.14em;
+  }
+
+  /* ── Gallery ── */
+  .land-gallery__grid {
+    grid-template-columns: 1fr;
+    grid-template-rows: 200px 200px 200px 200px;
+    gap: 3px;
+    margin-top: 32px;
+  }
+
+  .land-gallery__item--wide { grid-column: span 1; }
+  .land-gallery__item--tall { grid-row: span 1; }
+
+  .land-gallery__header {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 8px;
+  }
+
+  /* ── Testimonial ── */
+  .land-testimonial {
+    margin-top: 36px;
+    padding: 36px 20px 32px;
+  }
+
+  .land-testimonial__mark-icon {
+    width: 28px;
+  }
+
+  .land-testimonial__marks--top {
+    margin-bottom: 20px;
+  }
+
+  .land-testimonial__marks--bottom {
+    margin-top: 20px;
+  }
+
+  .land-testimonial__body {
+    min-height: 80px;
+  }
+
+  .land-testimonial__quote {
+    font-size: 16px;
+    line-height: 1.7;
+  }
+
+  .land-testimonial__divider {
+    margin: 24px auto;
+  }
+
+  .land-testimonial__author {
+    font-size: 12px;
+  }
+
+  .land-testimonial__role {
+    font-size: 11px;
+  }
+
+  .land-testimonial__nav {
+    margin-top: 32px;
+    gap: 14px;
+  }
+
+  .land-testimonial__arrow {
+    width: 36px;
+    height: 36px;
+  }
+
+  /* ── Payment / Pricing ── */
+  .land-payment__header {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 12px;
+  }
+
+  .land-payment__blurb {
+    text-align: left;
+    max-width: 100%;
+    font-size: 12px;
+  }
+
+  .land-payment__grid {
+    grid-template-columns: 1fr;
+    gap: 16px;
+    margin-top: 36px;
+  }
+
+  .land-plan-card {
+    padding: 28px 22px 24px;
+  }
+
+  .land-plan-card--featured {
+    transform: none;
+    padding: 32px 24px 28px;
+    box-shadow: 0 16px 40px rgba(14, 26, 20, 0.14);
+  }
+
+  .land-plan-card--featured:hover {
+    transform: none;
+  }
+
+  .land-plan-card:not(.land-plan-card--featured):hover {
+    transform: none;
+    box-shadow: none;
+  }
+
+  .land-plan-card__price {
+    font-size: 32px;
+  }
+
+  .land-plan-card__name {
+    font-size: 11px;
+  }
+
+  .land-plan-card__feature {
+    font-size: 13px;
+  }
+
+  .land-plan-card__cta {
+    font-size: 10px;
+    padding: 14px;
+  }
+
+  /* ── Contact ── */
+  .land-contact__grid {
+    grid-template-columns: 1fr;
+    gap: 36px;
+    margin-top: 28px;
+  }
+
+  .land-form__row {
+    grid-template-columns: 1fr;
+    gap: 0;
+  }
+
+  .land-form__submit {
+    width: 100%;
+    justify-content: center;
+    padding: 14px 28px;
+  }
+
+  .land-contact__info-value {
+    font-size: 14px;
+  }
+
+  .land-contact__office-hours {
+    font-size: 12px;
+  }
+
+  /* ── Newsletter ── */
+  .land-newsletter {
+    grid-template-columns: 1fr;
+    padding: 40px 24px;
+    gap: 32px;
+    margin: 0 8px 8px;
+    border-radius: 16px;
+  }
+
+  .land-newsletter__left,
+  .land-newsletter__form {
+    max-width: 100%;
+    width: 100%;
+  }
+
+  .land-newsletter__heading {
+    font-size: clamp(20px, 5vw, 28px);
+  }
+
+  .land-newsletter__sub {
+    font-size: 13px;
+  }
+
+  .land-newsletter__btn {
+    width: 100%;
+    text-align: center;
+    padding: 12px 20px;
+    margin-top: 20px;
+  }
+
+  .land-newsletter__input {
+    font-size: 13px;
+    padding: 14px 20px;
+  }
+
+  .land-newsletter__fine-print {
+    font-size: 9px;
+  }
+
+  /* ── Footer ── */
+  .land-footer {
+    padding: 40px 20px 20px;
+    margin: 0 8px 8px;
+    border-radius: 16px;
+  }
+
+  .land-footer__top {
+    grid-template-columns: 1fr 1fr;
+    gap: 28px;
+    padding-bottom: 32px;
+  }
+
+  .land-footer__top > :first-child {
+    grid-column: span 2;
+  }
+
+  .land-footer__tagline {
+    font-size: 13px;
+    max-width: 100%;
+  }
+
+  .land-footer__col-title {
+    font-size: 9px;
+    margin-bottom: 14px;
+  }
+
+  .land-footer__link {
+    font-size: 13px;
+  }
+
+  .land-footer__links {
+    gap: 10px;
+  }
+
+  .land-footer__bottom {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 14px;
+    padding-top: 20px;
+  }
+
+  .land-footer__copy {
+    font-size: 9px;
+  }
+
+  /* ── "View All" button ── */
+  .land-view-all {
+    font-size: 10px;
+    padding: 11px 20px 11px 22px;
+  }
+
+  /* ── Dividers ── */
+  .land-label {
+    font-size: 8px;
+    gap: 10px;
+    margin-bottom: 14px;
+  }
+
+  .land-label::before {
+    width: 6px;
+    height: 6px;
+  }
+
+  /* ── RTL mobile adjustments ── */
+  html[lang="ar"] .land-hero__tag {
+    right: auto;
+    left: 16px;
+  }
+
+  html[lang="ar"] .land-payment__blurb {
+    text-align: right;
+  }
+
+  html[lang="ar"] .land-projects__header {
+    align-items: flex-start;
+  }
+
+  html[lang="ar"] .land-footer__bottom {
+    align-items: flex-start;
+  }
+
+  /* ── RTL project page mobile ── */
+  html[lang="ar"] .proj-header {
+    direction: rtl;
+  }
+
+  html[lang="ar"] .proj-header__right {
+    align-self: flex-start;
+  }
+
+  html[lang="ar"] .proj-header__right .land-label {
+    justify-content: flex-start;
+  }
+
+  html[lang="ar"] .proj-nav-item {
+    text-align: right;
+  }
+
+  html[lang="ar"] .land-proj-nav--next {
+    align-items: flex-start;
+  }
+}
+
+/* ── Extra small screens (≤400px) ──────────────────────────── */
+@media (max-width: 400px) {
+  .land-hero__title {
+    font-size: clamp(30px, 10vw, 48px);
+  }
+
+  .land-hero__stat {
+    padding: 12px 12px;
+  }
+
+  .land-hero__stat-num {
+    font-size: 18px;
+  }
+
+  .land-about__stat-num {
+    font-size: 22px;
+  }
+
+  .land-plan-card__price {
+    font-size: 28px;
+  }
+
+  .land-newsletter__heading {
+    font-size: clamp(20px, 5.5vw, 30px);
+  }
+
+  .land-gallery__grid {
+    grid-template-rows: 170px 170px 170px 170px;
+  }
+}
+
+/* ============================================================
+   RESPONSIVE — Project page  (.proj-* helper classes)
+   ============================================================ */
+
+.proj-stats-bar {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  background: var(--land-hero);
+}
+
+.proj-overview {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 80px;
+  align-items: start;
+}
+
+.proj-gallery-grid {
+  display: grid;
+  grid-template-columns: 1.6fr 1fr;
+  grid-template-rows: 280px 280px;
+  gap: 12px;
+  margin-top: 32px;
+}
+
+.proj-gallery-main {
+  grid-row: 1 / 3;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+}
+
+.proj-gallery-side {
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+}
+
+.proj-nav-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+}
+
+/* ── Project page: "How It Works" step cards ─────────────── */
+.proj-how-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 20px;
+  margin-top: 52px;
+}
+
+/* ── Project page header ─────────────────────────────────── */
+.proj-header {
+  padding: 40px 64px 20px;
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  border-bottom: 1px solid var(--land-border-soft);
+}
+
+/* ── Project page map container ──────────────────────────── */
+.proj-map-container {
+  height: calc(100vh - 180px);
+  min-height: 500px;
+  display: flex;
+  direction: ltr;
+  border-bottom: 1px solid var(--land-border-soft);
+}
+
+/* ── Project page prev/next nav ──────────────────────────── */
+.proj-nav-item {
+  padding: 48px 64px;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+
+.proj-nav-item__name {
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: 28px;
+  font-weight: 700;
+  color: var(--land-ink);
+  letter-spacing: -0.01em;
+}
+
+@media (max-width: 1024px) and (min-width: 768px) {
+  .proj-header {
+    padding: 32px 40px 16px;
+  }
+
+  .proj-nav-item {
+    padding: 40px;
+  }
+
+  .proj-nav-item__name {
+    font-size: 22px;
+  }
+
+  .proj-overview {
+    gap: 40px;
+  }
+
+  .proj-gallery-grid {
+    grid-template-rows: 220px 220px;
+  }
+}
+
+@media (max-width: 767px) {
+
+  .proj-stats-bar {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .proj-overview {
+    grid-template-columns: 1fr;
+    gap: 32px;
+  }
+
+  .proj-gallery-grid {
+    grid-template-columns: 1fr;
+    grid-template-rows: 200px 200px 200px;
+  }
+
+  .proj-gallery-main {
+    grid-row: auto;
+  }
+
+  .proj-nav-grid {
+    grid-template-columns: 1fr;
+  }
+
+  /* Project page header */
+  .proj-header {
+    padding: 20px 20px 16px;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 16px;
+  }
+
+  .proj-header__right {
+    align-self: flex-start;
+    padding-bottom: 0;
+  }
+
+  /* Project page nav */
+  .proj-nav-item {
+    padding: 28px 20px;
+  }
+
+  .proj-nav-item__name {
+    font-size: 20px;
+  }
+
+  /* Project page stats strip on mobile */
+  .proj-stats-strip .land-about__stat {
+    padding: 20px 16px !important;
+  }
+
+  .proj-stats-strip .land-about__stat-desc {
+    font-size: 7px !important;
+    margin-bottom: 8px !important;
+  }
+
+  .proj-stats-strip .land-about__stat-num {
+    font-size: 22px;
+  }
+
+  /* How It Works steps */
+  .proj-how-grid {
+    grid-template-columns: 1fr;
+    gap: 16px;
+    margin-top: 36px;
+  }
+
+  /* Project page back button */
+  .proj-back-btn {
+    top: 16px !important;
+    left: 16px !important;
+  }
+
+  /* Project page hero padding */
+  .proj-hero-content {
+    padding: 0 20px 32px !important;
+  }
+}
+
+/* ── Lot panel base ──────────────────────────────────────── */
+.proj-lot-panel {
+  width: 400px;
+  flex-shrink: 0;
+}
+
+@media (max-width: 1024px) and (min-width: 901px) {
+  .proj-lot-panel {
+    width: 340px;
+  }
+}
+
+/* ── Project map hero responsive ─────────────────────────── */
+@media (max-width: 900px) {
+  /* Stack map and panel vertically on smaller screens */
+  .proj-map-body-stack {
+    flex-direction: column !important;
+  }
+
+  .proj-map-container {
+    height: auto !important;
+    min-height: auto !important;
+  }
+
+  .proj-map-canvas {
+    flex: none !important;
+    height: 50vh !important;
+    min-height: 300px !important;
+  }
+
+  .proj-map-panel-mobile {
+    width: 100% !important;
+    height: auto !important;
+    max-height: none !important;
+    overflow: visible !important;
+    border-left: none !important;
+    border-right: none !important;
+    border-top: 1px solid var(--land-border-soft);
+  }
+}
+
+/* ============================================================
+   ACCESSIBILITY & POLISH (audit fixes)
+   ============================================================ */
+
+/* ── Focus-visible outlines ─────────────────────────────────── */
+.land-btn--primary:focus-visible,
+.land-btn--ghost:focus-visible,
+.land-plan-card__cta:focus-visible {
+  outline: 2px solid var(--land-dot);
+  outline-offset: 2px;
+}
+
+.land-project-card:focus-visible {
+  outline: 2px solid var(--land-dot);
+  outline-offset: 2px;
+  box-shadow: 0 0 0 4px rgba(183, 135, 38, 0.15);
+}
+
+.land-form__input:focus-visible,
+.land-form__textarea:focus-visible,
+.land-form__select:focus-visible,
+.land-newsletter__input:focus-visible {
+  outline: 2px solid var(--land-dot);
+  outline-offset: 1px;
+}
+
+/* Gallery / testimonial nav buttons */
+.land-testimonial__nav:focus-visible,
+.land-gallery__nav:focus-visible {
+  outline: 2px solid var(--land-dot);
+  outline-offset: 2px;
+}
+
+/* Footer and nav links */
+.land-footer__link:focus-visible,
+.land-footer__social:focus-visible,
+.unlicensed-nav-item:focus-visible,
+.unlicensed-mobile-nav__item:focus-visible {
+  outline: 2px solid var(--land-dot);
+  outline-offset: 2px;
+}
+
+/* Project page interactive elements */
+.land-proj-nav:focus-visible,
+.proj-nav-item:focus-visible {
+  outline: 2px solid var(--land-dot);
+  outline-offset: -2px;
+}
+
+/* ── Prefers-reduced-motion ─────────────────────────────────── */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+
+  .land-hero__bg {
+    animation: none;
+    opacity: 1;
+  }
+
+  .land-project-card:hover {
+    transform: none;
+  }
+
+  .land-project-card:hover img {
+    transform: none;
+  }
+}
+
+/* ── Color contrast fixes (WCAG AA) ────────────────────────── */
+
+/* Hero tag: bump from gold to a brighter, more legible variant */
+.land-hero__tag {
+  color: var(--land-inverse);
+  text-shadow: 0 1px 4px rgba(0, 0, 0, 0.5);
+}
+
+/* About stat descriptions: darken for legibility */
+.land-about__stat-desc {
+  color: var(--land-ink-soft);
+}
+
+/* Plan card sub text: darken from #888 */
+.land-plan-card__sub {
+  color: var(--land-ink-muted);
+}
+
+/* Footer copy: brighten slightly for contrast */
+.land-footer__copy {
+  color: var(--land-ink-soft);
+}
+
+/* ── Overflow-x guard for RTL ───────────────────────────────── */
+html[lang="ar"] body {
+  overflow-x: hidden;
+}
+
+html[lang="ar"] .unlicensed-main {
+  overflow-x: hidden;
+}
+
+/* ── Autofill styling override ──────────────────────────────── */
+.land-form__input:-webkit-autofill,
+.land-form__textarea:-webkit-autofill,
+.land-form__select:-webkit-autofill,
+.land-newsletter__input:-webkit-autofill {
+  -webkit-box-shadow: 0 0 0 50px var(--land-surface) inset;
+  -webkit-text-fill-color: var(--land-ink);
+  caret-color: var(--land-ink);
+}
