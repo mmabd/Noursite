@@ -59,7 +59,7 @@ export interface ProjectLotPlan {
   initialZoom: number;
 }
 
-const DEFAULT_INITIAL_ZOOM = 18;
+const DEFAULT_INITIAL_ZOOM = 23;
 
 /**
  * Registry of GeoJSON sources per project number.
