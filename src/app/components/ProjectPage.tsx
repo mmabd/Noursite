@@ -11,6 +11,7 @@ import { LotMap } from "./LotMap";
 import { LotPanel } from "./LotPanel";
 import { Reveal } from "./Reveal";
 import { StaticLotMap } from "./StaticLotMap";
+import { ProjectGallery } from "./ProjectGallery";
 
 const PROJECT_LABEL_KEYS = ["project1", "project1", "project2", "project3", "project4"] as const;
 
@@ -150,24 +151,52 @@ export function ProjectPage() {
         />
       </div>
 
-      {/* ── Stats strip ────────────────────────────────────────── */}
-      <div className="land-about__stats proj-stats-strip" style={{ borderBottom: "1px solid var(--land-border-soft)" }}>
+      {/* ── Stats strip ─────────────────────────────────────── */}
+      <div style={{
+        display: "grid",
+        gridTemplateColumns: "repeat(4, 1fr)",
+        margin: "40px 80px 24px",
+        borderTop: "1px solid var(--land-border-soft)",
+        borderBottom: "1px solid var(--land-border-soft)",
+      }}>
         {[
           { label: copy.projectPage.siteArea, value: project.area },
           unitMetric,
           { label: copy.projectPage.projectValue, value: project.value },
           { label: copy.projectPage.completion, value: project.completion },
-        ].map((s) => (
-          <div key={s.label} className="land-about__stat" style={{ padding: "32px 40px" }}>
-            <div className="land-about__stat-desc" style={{ marginBottom: 12, marginTop: 0 }}>
-              {s.label}
-            </div>
-            <div className="land-about__stat-num">
+        ].map((s, i, arr) => (
+          <div key={s.label} style={{
+            padding: "28px 32px",
+            borderInlineEnd: i < arr.length - 1 ? "1px solid var(--land-border-soft)" : "none",
+          }}>
+            <div style={{
+              fontFamily: fontMono,
+              fontSize: 28,
+              fontWeight: 700,
+              color: "var(--land-ink)",
+              letterSpacing: "-0.02em",
+              lineHeight: 1.1,
+            }}>
               {s.value}
+            </div>
+            <div style={{
+              fontFamily: fontMono,
+              fontSize: 8,
+              letterSpacing: "0.2em",
+              textTransform: "uppercase" as const,
+              color: "var(--land-ink-muted)",
+              marginTop: 6,
+            }}>
+              {s.label}
             </div>
           </div>
         ))}
       </div>
+
+      {/* ── Gallery ──────────────────────────────────────────── */}
+      {project.gallery.length > 0 && (
+        <ProjectGallery images={project.gallery} projectName={project.name} />
+      )}
 
       {/* ── Overview ───────────────────────────────────────────── */}
       <section className="land-section land-section--off" id="overview">
@@ -282,10 +311,11 @@ export function ProjectPage() {
                   className="land-project-card land-project-card--static"
                   style={{ height: "100%", background: "var(--land-card-alt)" }}
                 >
-                  {/* Static Google Map zoomed on this lot */}
+                  {/* Static Google Map zoomed on this lot — overflow clips Google attribution */}
                   <div style={{
                     width: "100%",
-                    height: "100%",
+                    height: "calc(100% + 40px)",
+                    marginBottom: -40,
                     overflow: "hidden",
                   }}>
                     {lotPlan ? (
@@ -346,8 +376,10 @@ export function ProjectPage() {
                       <span
                         className="land-project-card__status"
                         style={{
-                          color: statusColor,
-                          background: statusBg,
+                          color: "#fff",
+                          background: lot.status === "available" ? "var(--land-status-available)"
+                            : lot.status === "reserved" ? "var(--land-status-reserved)"
+                            : "var(--land-status-sold)",
                         }}
                       >
                         {lot.status === "available" ? `● ${statusText}` : statusText}
@@ -355,7 +387,7 @@ export function ProjectPage() {
                       <a
                         href="/#contact"
                         className="land-btn--primary"
-                        style={{ fontSize: 13, padding: "10px 24px", textDecoration: "none" }}
+                        style={{ fontSize: 13, padding: "10px 24px", textDecoration: "none", background: "#fff", color: "#000" }}
                       >
                         {copy.projectPage.contactBtn}
                       </a>

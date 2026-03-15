@@ -5,7 +5,7 @@ const images = [
   {
     id: "g1",
     url: "https://images.unsplash.com/photo-1572293070206-a77065f6d651?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&w=1000",
-    label: "AERIAL SURVEY — MERIDIAN",
+    label: "AERIAL SURVEY — الغروب",
     wide: true,
   },
   {

@@ -22,9 +22,9 @@ interface GoogleLotMapProps {
 }
 
 const MAP_STATUS_COLOR: Record<LotStatus, string> = {
-  available: "#34d399",
+  available: "#ffffff",
   reserved: "#fbbf24",
-  sold: "#f87171",
+  sold: "#7a1a1a",
 };
 
 const MAP_STATUS_STROKE: Record<LotStatus, string> = {
@@ -67,6 +67,7 @@ export function GoogleLotMap({
   const mapLotsRef = useRef(mapLots);
   const [loadError, setLoadError] = useState<string | null>(null);
   const [mapReady, setMapReady] = useState(false);
+  const [mapActive, setMapActive] = useState(false);
 
   // Keep refs up to date
   geoJsonRef.current = geoJson;
@@ -89,13 +90,13 @@ export function GoogleLotMap({
           scale: isSelected ? 12 : isHovered ? 11 : 10,
           fillColor: MAP_PANEL,
           fillOpacity: 1,
-          strokeColor: isSelected ? statusColor : MAP_BORDER,
+          strokeColor: isSelected ? "#4a7c59" : MAP_BORDER,
           strokeOpacity: 1,
           strokeWeight: isSelected ? 2 : 1,
         },
         label: {
           text: String(lot.lotNumber).padStart(2, "0"),
-          color: isSelected ? statusColor : MAP_INK,
+          color: isSelected ? "#4a7c59" : MAP_INK,
           fontSize: isSelected ? "10px" : "8px",
           fontFamily: isArabic ? "Baloo Bhaijaan 2" : "Space Mono",
           fontWeight: isSelected ? "700" : "600",
@@ -120,9 +121,9 @@ export function GoogleLotMap({
 
       return {
         clickable: status !== "sold",
-        fillColor: fillColor,
-        fillOpacity: isSelected ? 0.65 : isHovered ? 0.50 : 0.35,
-        strokeColor: isSelected ? "#ffffff" : isHovered ? strokeColor : strokeColor,
+        fillColor: isSelected ? "#4a7c59" : fillColor,
+        fillOpacity: isSelected ? 0.9 : isHovered ? 0.85 : 0.8,
+        strokeColor: isSelected ? "#4a7c59" : isHovered ? strokeColor : strokeColor,
         strokeOpacity: isSelected ? 1 : isHovered ? 0.9 : 0.7,
         strokeWeight: isSelected ? 3 : isHovered ? 2.5 : 1.8,
         zIndex: isSelected ? 3 : isHovered ? 2 : 1,
@@ -163,7 +164,7 @@ export function GoogleLotMap({
           streetViewControl: false,
           fullscreenControl: false,
           clickableIcons: false,
-          gestureHandling: "greedy",
+          gestureHandling: "none",
           keyboardShortcuts: false,
         });
 
@@ -245,6 +246,15 @@ export function GoogleLotMap({
   // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [initialCenter.lat, initialCenter.lng, initialZoom]);
 
+  // Toggle gesture handling when map is activated/deactivated
+  useEffect(() => {
+    if (!mapRef.current || !mapReady) return;
+    mapRef.current.setOptions({
+      gestureHandling: mapActive ? "greedy" : "none",
+      zoomControl: mapActive,
+    });
+  }, [mapActive, mapReady]);
+
   // Update feature statuses in-place when lot data changes (no map rebuild)
   useEffect(() => {
     if (!mapRef.current || !mapReady) return;
@@ -318,6 +328,77 @@ export function GoogleLotMap({
         </div>
       )}
 
+      {/* Click-to-activate overlay */}
+      {mapReady && !mapActive && (
+        <div
+          onClick={() => setMapActive(true)}
+          style={{
+            position: "absolute",
+            inset: 0,
+            cursor: "pointer",
+            display: "flex",
+            alignItems: "flex-end",
+            justifyContent: "center",
+            paddingBottom: 24,
+            background: "transparent",
+            zIndex: 5,
+          }}
+        >
+          <div style={{
+            background: "rgba(18, 32, 25, 0.75)",
+            backdropFilter: "blur(6px)",
+            color: "#fff",
+            fontFamily: fontBody,
+            fontSize: 12,
+            fontWeight: 600,
+            letterSpacing: "0.06em",
+            padding: "10px 20px",
+            borderRadius: 20,
+            display: "flex",
+            alignItems: "center",
+            gap: 8,
+            transition: "background 0.2s ease",
+          }}>
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+              <path d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7" />
+            </svg>
+            {isArabic ? "اضغط لتفعيل الخريطة" : "Click to interact with map"}
+          </div>
+        </div>
+      )}
+
+      {/* Deactivate button */}
+      {mapActive && (
+        <button
+          onClick={() => setMapActive(false)}
+          style={{
+            position: "absolute",
+            top: 12,
+            right: 12,
+            zIndex: 5,
+            background: "rgba(18, 32, 25, 0.75)",
+            backdropFilter: "blur(6px)",
+            color: "#fff",
+            fontFamily: fontBody,
+            fontSize: 11,
+            fontWeight: 600,
+            letterSpacing: "0.04em",
+            padding: "8px 14px",
+            borderRadius: 16,
+            border: "none",
+            cursor: "pointer",
+            display: "flex",
+            alignItems: "center",
+            gap: 6,
+          }}
+        >
+          <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+            <line x1="18" y1="6" x2="6" y2="18" />
+            <line x1="6" y1="6" x2="18" y2="18" />
+          </svg>
+          {isArabic ? "قفل الخريطة" : "Lock map"}
+        </button>
+      )}
     </div>
   );
 }

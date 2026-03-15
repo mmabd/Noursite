@@ -10,7 +10,7 @@ const COPY = {
       language: "Language",
       nav: {
         home: "Homepage",
-        project1: "Project One",
+        project1: "Sunset Project",
         project2: "Project Two",
         project3: "Project Three",
         project4: "Project Four",
@@ -211,6 +211,7 @@ const COPY = {
       sold: "Sold",
     },
     projectPage: {
+      gallery: "Gallery",
       notFound: "Project Not Found.",
       back: "All Projects",
       availability: "Availability",
@@ -235,7 +236,7 @@ const COPY = {
       previous: "Previous",
       next: "Next",
       labels: {
-        project1: "Project One",
+        project1: "Sunset Project",
         project2: "Project Two",
         project3: "Project Three",
         project4: "Project Four",
@@ -292,7 +293,7 @@ const COPY = {
       language: "اللغة",
       nav: {
         home: "الرئيسية",
-        project1: "المشروع الأول",
+        project1: "مشروع الغروب",
         project2: "المشروع الثاني",
         project3: "المشروع الثالث",
         project4: "المشروع الرابع",
@@ -493,6 +494,7 @@ const COPY = {
       sold: "مباع",
     },
     projectPage: {
+      gallery: "معرض الصور",
       notFound: "المشروع غير موجود.",
       back: "جميع المشاريع",
       availability: "التوفر",
@@ -517,7 +519,7 @@ const COPY = {
       previous: "السابق",
       next: "التالي",
       labels: {
-        project1: "المشروع الأول",
+        project1: "مشروع الغروب",
         project2: "المشروع الثاني",
         project3: "المشروع الثالث",
         project4: "المشروع الرابع",

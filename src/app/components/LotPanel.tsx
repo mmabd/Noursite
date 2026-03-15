@@ -20,6 +20,12 @@ const STATUS_COLOR: Record<LotStatus, string> = {
   sold:      "var(--land-status-sold)",
 };
 
+const STATUS_STROKE: Record<LotStatus, string> = {
+  available: "var(--land-status-available-stroke)",
+  reserved:  "transparent",
+  sold:      "transparent",
+};
+
 function getStatusLabel(status: LotStatus, copy: ReturnType<typeof useLanguage>["copy"]) {
   return copy.statuses[status];
 }
@@ -160,6 +166,7 @@ function PanelOverview({ project, lots }: { project: Project; lots: Lot[] }) {
             <div style={{
               width: 8, height: 8,
               background: STATUS_COLOR[s],
+              border: `1.5px solid ${STATUS_STROKE[s]}`,
               flexShrink: 0,
               opacity: 0.9,
             }} />
@@ -269,6 +276,7 @@ function PanelLotDetail({ lot, onDeselect }: { lot: Lot; onDeselect: () => void 
           <div style={{
             width: 8, height: 8,
             background: STATUS_COLOR[lot.status],
+            border: `1.5px solid ${STATUS_STROKE[lot.status]}`,
             flexShrink: 0,
           }} />
           <span style={{
@@ -437,6 +445,7 @@ export function LotPanel({
                   <div style={{
                     width: 6, height: 6,
                     background: STATUS_COLOR[lot.status],
+                    border: `1.5px solid ${STATUS_STROKE[lot.status]}`,
                     opacity: 0.9,
                     flexShrink: 0,
                   }} />

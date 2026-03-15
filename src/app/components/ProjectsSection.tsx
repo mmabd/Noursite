@@ -4,7 +4,7 @@ import { useLanguage } from "../i18n";
 const projects = [
   {
     id: "P-001",
-    name: "MERIDIAN HEIGHTS",
+    name: "مشروع الغروب",
     type: "RESIDENTIAL",
     location: "CAPE TOWN, WC",
     status: "active" as const,

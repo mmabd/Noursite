@@ -11,21 +11,21 @@ interface StaticLotMapProps {
 }
 
 const STATUS_FILL: Record<LotStatus, string> = {
-  available: "0x34d399",
+  available: "0x3a6b4a",
   reserved: "0xfbbf24",
-  sold: "0xf87171",
+  sold: "0x7a1a1a",
 };
 
 const STATUS_FILL_FOCUS: Record<LotStatus, string> = {
-  available: "0x34d399A6",
-  reserved: "0xfbbf24A6",
-  sold: "0xf87171A6",
+  available: "0x3a6b4aCC",
+  reserved: "0xfbbf24CC",
+  sold: "0x7a1a1aCC",
 };
 
 const STATUS_FILL_DIM: Record<LotStatus, string> = {
-  available: "0x34d39933",
-  reserved: "0xfbbf2433",
-  sold: "0xf8717133",
+  available: "0xffffff00",
+  reserved: "0xffffff00",
+  sold: "0xffffff00",
 };
 
 function encodePolyline(coords: [number, number][]): string {
@@ -66,8 +66,10 @@ function encodeUnsignedNumber(num: number): string {
 }
 
 export function StaticLotMap({ geoJson, focusLotId, center, zoom }: StaticLotMapProps) {
-  // Build path params for each lot polygon
+  // Build path params — render non-focused lots first, focused lot last
+  // so the selected lot's white stroke sits on top of neighboring black strokes
   const paths: string[] = [];
+  let focusPath: string | null = null;
 
   for (const feature of geoJson.features) {
     const lotId = feature.properties.lotId;
@@ -78,12 +80,20 @@ export function StaticLotMap({ geoJson, focusLotId, center, zoom }: StaticLotMap
     if (coords.length === 0) continue;
 
     const fillColor = isFocus ? STATUS_FILL_FOCUS[status] : STATUS_FILL_DIM[status];
-    const strokeColor = isFocus ? "0xffffffFF" : "0x2d2d2d80";
-    const strokeWeight = isFocus ? 3 : 1;
+    const strokeColor = isFocus ? "0xffffffEE" : "0x000000FF";
+    const strokeWeight = isFocus ? 3 : 2;
 
     const encoded = encodePolyline(coords as [number, number][]);
-    paths.push(`path=fillcolor:${fillColor}|color:${strokeColor}|weight:${strokeWeight}|enc:${encoded}`);
+    const pathStr = `path=fillcolor:${fillColor}|color:${strokeColor}|weight:${strokeWeight}|enc:${encoded}`;
+
+    if (isFocus) {
+      focusPath = pathStr;
+    } else {
+      paths.push(pathStr);
+    }
   }
+  // Append focused lot last so it renders on top
+  if (focusPath) paths.push(focusPath);
 
   const url = `https://maps.googleapis.com/maps/api/staticmap?`
     + `center=${center.lat},${center.lng}`
